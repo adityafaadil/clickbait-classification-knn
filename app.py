@@ -40,16 +40,26 @@ knn.fit(train_features, train_label)
 # mengevaluasi performa model
 accuracy = knn.score(test_features, test_label)
 
-# menampilkan hasil di aplikasi Streamlit
+# Define the title and subtitle of the app
 st.title('Clickbait Classification with KNN')
-st.write('Accuracy:', accuracy)
+st.write('Enter a clickbait title to classify')
 
-text_input = st.text_input('Enter a clickbait title:')
-text_features = vectorizer.transform([text_input])
-text_features = scaler.transform(text_features.toarray())
-prediction = knn.predict(text_features)
+# Create a text input for users to enter a title
+text_input = st.text_input('Title')
 
-if prediction == 0:
-    st.write('Not clickbait')
-else:
-    st.write('Clickbait')
+# Create a button to classify the title
+classify_button = st.button('Classify')
+
+if classify_button:
+    # Transform the user input using the vectorizer and scaler
+    text_features = vectorizer.transform([text_input])
+    text_features = scaler.transform(text_features.toarray())
+
+    # Predict whether the title is clickbait or not
+    prediction = knn.predict(text_features)
+
+    # Display the prediction
+    if prediction == 0:
+        st.write('Not clickbait')
+    else:
+        st.write('Clickbait')
