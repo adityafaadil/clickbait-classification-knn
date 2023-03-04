@@ -1,36 +1,37 @@
 import streamlit as st
-import pandas as pd
-import pickle
+import joblib
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
 
-# load model
-with open('model/knn_model.pkl', 'rb') as f:
-    model = pickle.load(f)
+# Load model
+model = joblib.load('model/clickbait_knn_model.joblib')
 
-# load TF-IDF vectorizer
-with open('model/tfidf_vectorizer.pkl', 'rb') as f:
-    tfidf_vectorizer = pickle.load(f)
+# Define TF-IDF vectorizer
+vectorizer = TfidfVectorizer()
 
-# define function for predicting clickbait
-def predict_clickbait(title):
-    # transform text using tf-idf vectorizer
-    title_tfidf = tfidf_vectorizer.fit_transform([title])
-    # predict clickbait using trained model
-    prediction = model.predict(title_tfidf)
-    # return prediction
-    return prediction[0]
+# Define Standard Scaler
+scaler = StandardScaler()
 
-# set up streamlit app
-st.title('Clickbait Classifier')
+# Set app title
+st.title('Klasifikasi Berita Clickbait')
 
-# get user input
-title = st.text_input('Enter the title of the article:')
+# Get input from user
+input_text = st.text_input('Masukkan judul berita')
+
+# Make prediction
 if st.button('Predict'):
-    # predict clickbait
-    prediction = predict_clickbait(title)
-    # display prediction
+    # Process input text
+    input_text = [input_text]
+    input_vec = vectorizer.transform(input_text)
+    input_scaled = scaler.transform(input_vec)
+    
+    # Make prediction using model
+    prediction = model.predict(input_scaled)
+    
+    # Display prediction
     if prediction == 1:
-        st.write('This article is likely to be clickbait.')
+        st.write('Judul berita ini termasuk clickbait')
     else:
-        st.write('This article is not likely to be clickbait.')
+        st.write('Judul berita ini tidak termasuk clickbait')
