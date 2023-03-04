@@ -4,6 +4,7 @@ from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import KNeighborsClassifier
+from nltk.corpus import stopwords
 import streamlit as st
 
 # load dataset clickbait
