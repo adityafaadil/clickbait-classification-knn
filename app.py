@@ -24,7 +24,7 @@ with open('tfidf_vectorizer.pkl', 'rb') as f:
 # define function for predicting clickbait
 def predict_clickbait(title):
     # transform text using tf-idf vectorizer
-    title_tfidf = tfidf_vectorizer.transform([title])
+    title_tfidf = tfidf_vectorizer.fit_transform([title])
     # predict clickbait using trained model
     prediction = model.predict(title_tfidf)
     # return prediction
