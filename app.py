@@ -6,9 +6,9 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import StandardScaler
 
 # load the KNN model and other artifacts
-model = joblib.load('model/knn_model.pkl')
-vectorizer = joblib.load('model/tfidf_vectorizer.pkl')
-scaler = joblib.load('model/scaler.pkl')
+model = joblib.load('/model/knn_model.pkl')
+vectorizer = joblib.load('/model/tfidf_vectorizer.pkl')
+scaler = joblib.load('/model/scaler.pkl')
 
 # create a function for prediction
 def predict_clickbait(text_input):
