@@ -6,7 +6,7 @@ from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 
 # Load model
-model = joblib.load('model/knn_model.jolib')
+model = joblib.load('model/knn_model.joblib')
 
 # Define TF-IDF vectorizer
 vectorizer = TfidfVectorizer()
