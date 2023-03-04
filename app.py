@@ -1,33 +1,37 @@
 import streamlit as st
-import pandas as pd
 import joblib
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 
-# load the KNN model and other artifacts
-model = joblib.load('knn_model.pkl')
-vectorizer = joblib.load('tfidf_vectorizer.pkl')
-scaler = joblib.load('scaler.pkl')
+# Load model
+model = joblib.load('model/knn_model.jolib')
 
-# create a function for prediction
-def predict_clickbait(text_input):
-    text_features = vectorizer.transform([text_input])
-    text_features = scaler.transform(text_features.toarray())
-    prediction = model.predict(text_features)
+# Define TF-IDF vectorizer
+vectorizer = TfidfVectorizer()
 
-    return prediction[0]
+# Define Standard Scaler
+scaler = StandardScaler()
 
-# set up the app interface
-st.title('Clickbait Classification with KNN')
+# Set app title
+st.title('Klasifikasi Berita Clickbait')
 
-# get user input and make prediction
-text_input = st.text_input('Enter a clickbait title:')
-if text_input != '':
-    prediction = predict_clickbait(text_input)
+# Get input from user
+input_text = st.text_input('Masukkan judul berita')
 
-    # display prediction result
-    if prediction == 0:
-        st.write('Not clickbait')
+# Make prediction
+if st.button('Predict'):
+    # Process input text
+    input_text = [input_text]
+    input_vec = vectorizer.transform(input_text)
+    input_scaled = scaler.transform(input_vec)
+    
+    # Make prediction using model
+    prediction = model.predict(input_scaled)
+    
+    # Display prediction
+    if prediction == 1:
+        st.write('Judul berita ini termasuk clickbait')
     else:
-        st.write('Clickbait')
+        st.write('Judul berita ini tidak termasuk clickbait')
