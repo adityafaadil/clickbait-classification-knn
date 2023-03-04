@@ -4,7 +4,6 @@ from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import KNeighborsClassifier
-from nltk.corpus import stopwords
 import streamlit as st
 
 # load dataset clickbait
@@ -14,7 +13,7 @@ data = pd.read_csv('data_bersih.csv')
 train_data, test_data, train_label, test_label = train_test_split(data['title'], data['label'], test_size=0.2, random_state=42)
 
 # melakukan vektorisasi teks pada dataset
-vectorizer = TfidfVectorizer(stop_words='indonesian')
+vectorizer = TfidfVectorizer()
 train_features = vectorizer.fit_transform(train_data)
 test_features = vectorizer.transform(test_data)
 
