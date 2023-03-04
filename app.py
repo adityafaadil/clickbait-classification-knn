@@ -5,7 +5,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.neighbors import KNeighborsClassifier
 
 # load model
-with open('model/clickbait_knn_model.pkl', 'rb') as f:
+with open('model/knn_model.pkl', 'rb') as f:
     model = pickle.load(f)
 
 # load TF-IDF vectorizer
