@@ -6,8 +6,8 @@ import re
 import string
 
 # Load the pre-trained model and vectorizer
-model = joblib.load('model.pkl')
-vectorizer = joblib.load('vectorizer.pkl')
+model = joblib.load('model/model.pkl')
+vectorizer = joblib.load('model/vectorizer.pkl')
 
 # Function to preprocess text data
 def preprocess_text(text):
