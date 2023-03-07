@@ -6,8 +6,8 @@ import re
 import string
 
 # Load the pre-trained model and vectorizer
-model = joblib.load('model/knn_model.pkl')
-vectorizer = joblib.load('model/vectorizer.pkl')
+model = joblib.load('model.pkl')
+vectorizer = joblib.load('vectorizer.pkl')
 
 # Function to preprocess text data
 def preprocess_text(text):
@@ -41,7 +41,7 @@ def app():
         # Display the prediction to the user
         if prediction == 0:
             st.write('Judul berita ini bukan clickbait.')
-        elif prediction == 1:
+        else:
             st.write('Judul berita ini clickbait.')
     
 # Run the Streamlit app
