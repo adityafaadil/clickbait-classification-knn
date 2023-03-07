@@ -39,7 +39,7 @@ def app():
         # Make a prediction using the pre-trained model
         prediction = model.predict(feature_vector)[0]
         # Display the prediction to the user
-        if prediction == 0:
+        if prediction != 0:
             st.write('This headline is not clickbait.')
         else:
             st.write('This headline is clickbait.')
