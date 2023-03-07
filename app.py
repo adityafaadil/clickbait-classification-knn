@@ -41,7 +41,7 @@ def app():
         # Display the prediction to the user
         if prediction == 0:
             st.write('Judul berita ini bukan clickbait.')
-        else:
+        elif prediction == 1:
             st.write('Judul berita ini clickbait.')
     
 # Run the Streamlit app
