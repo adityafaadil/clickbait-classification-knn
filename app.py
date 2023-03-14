@@ -5,45 +5,42 @@ import joblib
 import re
 import string
 
-# Load the pre-trained model and vectorizer
-model = joblib.load('model/knn_model.pkl')
-vectorizer = joblib.load('model/vectorizer.pkl')
 
-# Function to preprocess text data
-def preprocess_text(text):
-    # Convert to lowercase
-    text = text.lower()
-    # Remove punctuation
-    text = text.translate(str.maketrans('', '', string.punctuation))
-    # Remove numbers
-    text = re.sub('\d+', '', text)
-    # Remove whitespace
-    text = text.strip()
-    return text
+# Load model
+@st.cache
+def load_model():
+    with open('model/knn_model.pkl', 'rb') as file:
+        model = pickle.load(file)
+    return model
 
-# Define the Streamlit app
-def app():
-    st.set_page_config(page_title='Clickbait Classification', page_icon=':newspaper:', layout='wide')
-    st.title('Clickbait Classification')
-    st.write('Masukkan judul berita untuk diklasifikasi apakah itu clickbait atau tidak.')
-    
-    # Create a text input box for the user to enter a headline
-    user_input = st.text_input('Judul berita:')
-    
-    # Classify the headline if the user presses the 'Klasifikasi' button
-    if st.button('Klasifikasi'):
-        # Preprocess the user input
-        preprocessed_input = preprocess_text(user_input)
-        # Convert the preprocessed input into a feature vector
-        feature_vector = vectorizer.transform([preprocessed_input])
-        # Make a prediction using the pre-trained model
-        prediction = model.predict(feature_vector)[0]
-        # Display the prediction to the user
-        if prediction == 1:
-            st.write('Judul berita ini clickbait.')
+# Main function
+def main():
+    # Set page title and favicon
+    st.set_page_config(page_title='Klasifikasi Berita Clickbait', page_icon=':newspaper:', layout='wide')
+
+    # Load model
+    model = load_model()
+
+    # Display title and subtitle
+    st.title('Klasifikasi Berita Clickbait')
+    st.markdown('Ini adalah aplikasi untuk melakukan klasifikasi berita clickbait')
+
+    # Display input form
+    input_text = st.text_input('Masukkan judul berita:')
+
+    # Predict class and display result
+    if input_text:
+        input_data = [[input_text]]
+        prediction = model.predict(input_data)[0]
+
+        # Display result
+        st.markdown('---')
+        st.subheader('Hasil klasifikasi')
+        if prediction == 0:
+            st.error('Berita ini **bukan** clickbait')
         else:
-            st.write('Judul berita ini bukan clickbait.')
-    
-# Run the Streamlit app
+            st.success('Berita ini **adalah** clickbait')
+
+# Run main function
 if __name__ == '__main__':
-    app()
+    main()
