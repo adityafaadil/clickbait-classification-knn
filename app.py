@@ -37,12 +37,12 @@ def app():
         # Convert the preprocessed input into a feature vector
         feature_vector = vectorizer.transform([preprocessed_input])
         # Make a prediction using the pre-trained model
-        prediction = model.predict(feature_vector)[1]
+        prediction = model.predict(feature_vector)[0]
         # Display the prediction to the user
-        if prediction == 0:
-            st.write('Judul berita ini bukan clickbait.')
-        else:
+        if prediction == 1:
             st.write('Judul berita ini clickbait.')
+        else:
+            st.write('Judul berita ini bukan clickbait.')
     
 # Run the Streamlit app
 if __name__ == '__main__':
