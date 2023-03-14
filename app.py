@@ -10,7 +10,7 @@ import string
 @st.cache
 def load_model():
     with open('model/knn_model.pkl', 'rb') as file:
-        model = pickle.load(file)
+        model = joblib.load(file)
     return model
 
 # Main function
