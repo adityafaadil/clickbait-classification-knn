@@ -3,11 +3,11 @@ import streamlit as st
 from sklearn.feature_extraction.text import CountVectorizer
 
 # Load model
-with open('knn_model.pkl', 'rb') as file:
+with open('model/knn_model.pkl', 'rb') as file:
     model = pickle.load(file)
 
 # Load CountVectorizer
-with open('vectorizer.pkl', 'rb') as file:
+with open('model/vectorizer.pkl', 'rb') as file:
     cv = pickle.load(file)
 
 # Create Streamlit app
