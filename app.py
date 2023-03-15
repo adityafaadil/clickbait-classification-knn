@@ -26,11 +26,6 @@ def app():
             st.write(f'Prediksi: {prediction}')
         else:
             st.warning('Masukkan teks artikel terlebih dahulu.')
-    
-    # Display model accuracy
-    scores = cross_val_score(knn, X_train, y_train, cv=5)
-    accuracy = scores.mean()
-    st.write(f'Akurasi model: {accuracy:.2f}')
 
 # Run Streamlit app
 app()
