@@ -38,7 +38,7 @@ def app():
     text = st.text_input('Masukkan teks artikel:')
     
     # Convert the preprocessed input into a feature vector
-    feature_vector = vectorizer.transform([text])
+    feature_vector = vectorizer.fit_transform([text])
     
     # Classify text on button click
     if st.button('Klasifikasi'):
