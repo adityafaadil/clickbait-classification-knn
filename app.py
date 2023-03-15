@@ -1,28 +1,36 @@
-import pickle
 import streamlit as st
-from sklearn.feature_extraction.text import CountVectorizer
+import joblib
 
 # Load model
-with open('model/knn_model.pkl', 'rb') as file:
-    model = pickle.load(file)
+knn = joblib.load('model/model.joblib')
 
-# Load CountVectorizer
-with open('model/vectorizer.pkl', 'rb') as file:
-    cv = pickle.load(file)
+# Define function to classify text
+def classify_text(text):
+    text = preprocess_text(text)
+    text = vectorizer.transform([text])
+    prediction = knn.predict(text)[0]
+    return prediction
 
-# Create Streamlit app
-st.title("Clickbait News Classification")
+# Define Streamlit app
+def app():
+    st.title('Klasifikasi Berita Clickbait')
+    st.write('Gunakan model ini untuk menentukan apakah suatu artikel adalah clickbait atau tidak.')
+    
+    # Get user input
+    text = st.text_input('Masukkan teks artikel:')
+    
+    # Classify text on button click
+    if st.button('Klasifikasi'):
+        if text:
+            prediction = classify_text(text)
+            st.write(f'Prediksi: {prediction}')
+        else:
+            st.warning('Masukkan teks artikel terlebih dahulu.')
+    
+    # Display model accuracy
+    scores = cross_val_score(knn, X_train, y_train, cv=5)
+    accuracy = scores.mean()
+    st.write(f'Akurasi model: {accuracy:.2f}')
 
-# Create input form
-input_text = st.text_input("Input news title")
-
-# Create predict button
-if st.button("Predict"):
-    # Transform input_text into Bag of Words
-    input_text_bow = cv.transform([input_text])
-    # Predict
-    prediction = model.predict(input_text_bow)[0]
-    if prediction == 1:
-        st.write("This news title is clickbait")
-    else:
-        st.write("This news title is not clickbait")
+# Run Streamlit app
+app()
