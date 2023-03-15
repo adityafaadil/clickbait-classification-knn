@@ -2,6 +2,7 @@ import streamlit as st
 import joblib
 import re
 import string
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 # Load model
 knn = joblib.load('model/model.joblib')
@@ -17,6 +18,9 @@ def preprocess_text(text):
     # Remove whitespace
     text = text.strip()
     return text
+
+# definisikan vectorizer
+vectorizer = TfidfVectorizer()
 
 # Define function to classify text
 def classify_text(text):
