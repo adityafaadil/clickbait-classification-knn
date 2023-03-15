@@ -40,7 +40,7 @@ def app():
         # Make a prediction using the pre-trained model
         prediction = model.predict(feature_vector)[0]
         # Display the prediction to the user
-        if prediction == 1:
+        if prediction[0] == 1:
             st.write('Judul berita ini clickbait.')
         else:
             st.write('Judul berita ini bukan clickbait.')
