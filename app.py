@@ -6,7 +6,7 @@ import pickle
 import streamlit as st
 
 # Load dataset
-df = pd.read_csv("data/data_bersih.csv")
+df = pd.read_csv("dataset/data_bersih.csv")
 
 # Split dataset into X and y
 X = df["title"]
