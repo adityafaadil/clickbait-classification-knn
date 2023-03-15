@@ -1,11 +1,14 @@
 import streamlit as st
+import pandas as pd
+import numpy as np
 import joblib
 import re
 import string
-from sklearn.feature_extraction.text import TfidfVectorizer
 
-# Load model
-knn = joblib.load('model/model.joblib')
+
+# Load the pre-trained model and vectorizer
+model = joblib.load('model/model.joblib')
+vectorizer = joblib.load('model/vectorizer.joblib')
 
 # Function to preprocess text data
 def preprocess_text(text):
@@ -19,34 +22,29 @@ def preprocess_text(text):
     text = text.strip()
     return text
 
-# definisikan vectorizer
-vectorizer = TfidfVectorizer()
-
-# Define function to classify text
-def classify_text(text):
-    text = preprocess_text(text)
-    text = vectorizer.transform([text])
-    prediction = knn.predict(text)[0]
-    return prediction
-
-# Define Streamlit app
+# Define the Streamlit app
 def app():
-    st.title('Klasifikasi Berita Clickbait')
-    st.write('Gunakan model ini untuk menentukan apakah suatu artikel adalah clickbait atau tidak.')
+    st.set_page_config(page_title='Clickbait Classification', page_icon=':newspaper:', layout='wide')
+    st.title('Clickbait Classification')
+    st.write('Masukkan judul berita untuk diklasifikasi apakah itu clickbait atau tidak.')
     
-    # Get user input
-    text = st.text_input('Masukkan teks artikel:')
+    # Create a text input box for the user to enter a headline
+    user_input = st.text_input('Judul berita:')
     
-    # Convert the preprocessed input into a feature vector
-    feature_vector = vectorizer.fit_transform([text])
-    
-    # Classify text on button click
+    # Classify the headline if the user presses the 'Klasifikasi' button
     if st.button('Klasifikasi'):
-        if text:
-            prediction = classify_text(text)
-            st.write(f'Prediksi: {prediction}')
+        # Preprocess the user input
+        preprocessed_input = preprocess_text(user_input)
+        # Convert the preprocessed input into a feature vector
+        feature_vector = vectorizer.transform([preprocessed_input])
+        # Make a prediction using the pre-trained model
+        prediction = model.predict(feature_vector)[0]
+        # Display the prediction to the user
+        if prediction == 1:
+            st.write('Judul berita ini clickbait.')
         else:
-            st.warning('Masukkan teks artikel terlebih dahulu.')
-
-# Run Streamlit app
-app()
+            st.write('Judul berita ini bukan clickbait.')
+    
+# Run the Streamlit app
+if __name__ == '__main__':
+    app()
