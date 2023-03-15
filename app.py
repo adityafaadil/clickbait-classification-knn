@@ -1,8 +1,22 @@
 import streamlit as st
 import joblib
+import re
+import string
 
 # Load model
 knn = joblib.load('model/model.joblib')
+
+# Function to preprocess text data
+def preprocess_text(text):
+    # Convert to lowercase
+    text = text.lower()
+    # Remove punctuation
+    text = text.translate(str.maketrans('', '', string.punctuation))
+    # Remove numbers
+    text = re.sub('\d+', '', text)
+    # Remove whitespace
+    text = text.strip()
+    return text
 
 # Define function to classify text
 def classify_text(text):
