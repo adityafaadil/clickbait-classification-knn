@@ -1,50 +1,65 @@
-import streamlit as st
 import pandas as pd
 import numpy as np
-import joblib
-import re
-import string
+from sklearn.model_selection import train_test_split, cross_val_score
+from sklearn.neighbors import KNeighborsClassifier
+import pickle
+import streamlit as st
 
+# Load dataset
+df = pd.read_csv("data/data_bersih.csv")
 
-# Load the pre-trained model and vectorizer
-model = joblib.load('model/knn_model.pkl')
-vectorizer = joblib.load('model/vectorizer.pkl')
+# Split dataset into X and y
+X = df["title"]
+y = df["label_score"]
 
-# Function to preprocess text data
-def preprocess_text(text):
-    # Convert to lowercase
-    text = text.lower()
-    # Remove punctuation
-    text = text.translate(str.maketrans('', '', string.punctuation))
-    # Remove numbers
-    text = re.sub('\d+', '', text)
-    # Remove whitespace
-    text = text.strip()
-    return text
+# Create Bag of Words
+from sklearn.feature_extraction.text import CountVectorizer
+cv = CountVectorizer()
+X = cv.fit_transform(X)
 
-# Define the Streamlit app
-def app():
-    st.set_page_config(page_title='Clickbait Classification', page_icon=':newspaper:', layout='wide')
-    st.title('Clickbait Classification')
-    st.write('Masukkan judul berita untuk diklasifikasi apakah itu clickbait atau tidak.')
-    
-    # Create a text input box for the user to enter a headline
-    user_input = st.text_input('Judul berita:')
-    
-    # Classify the headline if the user presses the 'Klasifikasi' button
-    if st.button('Klasifikasi'):
-        # Preprocess the user input
-        preprocessed_input = preprocess_text(user_input)
-        # Convert the preprocessed input into a feature vector
-        feature_vector = vectorizer.transform([preprocessed_input])
-        # Make a prediction using the pre-trained model
-        prediction = model.predict(feature_vector)[0]
-        # Display the prediction to the user
-        if prediction[0] == 1:
-            st.write('Judul berita ini clickbait.')
-        else:
-            st.write('Judul berita ini bukan clickbait.')
-    
-# Run the Streamlit app
-if __name__ == '__main__':
-    app()
+# Split dataset into training and testing set
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+# Create model KNN dengan cross-validation nilai k nya dari 1 sampai 11
+scores = []
+for k in range(1, 12):
+    knn = KNeighborsClassifier(n_neighbors=k)
+    score = cross_val_score(knn, X_train, y_train, cv=10)
+    scores.append(score.mean())
+
+# Find the best k
+best_k = np.argmax(scores) + 1
+st.write("Best k: ", best_k)
+
+# Create model KNN dengan nilai k terbaik
+model = KNeighborsClassifier(n_neighbors=best_k)
+model.fit(X_train, y_train)
+
+# Save model
+with open('clickbait_model.pkl', 'wb') as file:
+    pickle.dump(model, file)
+
+# Load model
+with open('clickbait_model.pkl', 'rb') as file:
+    model = pickle.load(file)
+
+# Create Streamlit app
+st.title("Clickbait News Classification")
+
+# Create input form
+input_text = st.text_input("Input news title")
+
+# Create predict button
+if st.button("Predict"):
+    # Transform input_text into Bag of Words
+    input_text_bow = cv.transform([input_text])
+    # Predict
+    prediction = model.predict(input_text_bow)[0]
+    if prediction == 1:
+        st.write("This news title is clickbait")
+    else:
+        st.write("This news title is not clickbait")
+
+# Show accuracy
+accuracy = model.score(X_test, y_test)
+st.write("Accuracy: ", accuracy)
