@@ -5,7 +5,6 @@ import joblib
 import re
 import string
 
-
 # Load the pre-trained model and vectorizer
 model = joblib.load('model/model.joblib')
 vectorizer = joblib.load('model/vectorizer.joblib')
@@ -44,6 +43,15 @@ def app():
             st.write('Judul berita ini clickbait.')
         else:
             st.write('Judul berita ini bukan clickbait.')
+
+    # Show additional dashboard elements here
+    st.subheader('Dashboard')
+    
+    # Example: Display a table of previously classified headlines
+    previous_headlines = ['Judul 1', 'Judul 2', 'Judul 3']
+    previous_predictions = [1, 0, 1]
+    df = pd.DataFrame({'Judul Berita': previous_headlines, 'Prediksi Clickbait': previous_predictions})
+    st.dataframe(df)
     
 # Run the Streamlit app
 if __name__ == '__main__':
