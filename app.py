@@ -52,7 +52,18 @@ def app():
     previous_predictions = [1, 0, 1]
     df = pd.DataFrame({'Judul Berita': previous_headlines, 'Prediksi Clickbait': previous_predictions})
     st.dataframe(df)
-    
+
+    # Example: Show a bar chart of clickbait vs. non-clickbait headlines
+    labels = ['Clickbait', 'Non-Clickbait']
+    values = [2, 1]
+    chart_data = pd.DataFrame({'Label': labels, 'Value': values})
+    st.bar_chart(chart_data['Value'], labels=chart_data['Label'])
+
+    # Example: Display the most common words in the previous headlines
+    word_frequency = {'clickbait': 10, 'berita': 8, 'judul': 5, 'bukan': 4, 'ini': 3}
+    st.subheader('Word Frequency')
+    st.write(word_frequency)
+
 # Run the Streamlit app
 if __name__ == '__main__':
     app()
