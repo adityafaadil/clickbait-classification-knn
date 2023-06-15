@@ -46,7 +46,7 @@ def app():
             st.write('Judul berita ini bukan clickbait.')
 
 # Read the data from CSV
-data = pd.read_csv('https://raw.githubusercontent.com/adityafaadil/clickbait-classification-knn/main/dataset/data_bersih.csv')
+data = pd.read_csv('/dataset/data_bersih.csv')
 
 # Set the page title and layout
 st.set_page_config(page_title='Clickbait Dashboard', layout='wide')
