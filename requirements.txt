@@ -4,4 +4,4 @@ joblib==1.2.0
 scikit-learn==1.0.2
 streamlit==1.4.0
 matplotlib==3.7.1
-worcloud==1.9.2
+worcloud==1.8.2.2
