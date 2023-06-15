@@ -44,25 +44,52 @@ def app():
         else:
             st.write('Judul berita ini bukan clickbait.')
 
-    # Show additional dashboard elements here
-    st.subheader('Dashboard')
-    
-    # Example: Display a table of previously classified headlines
-    previous_headlines = ['Judul 1', 'Judul 2', 'Judul 3']
-    previous_predictions = [1, 0, 1]
-    df = pd.DataFrame({'Judul Berita': previous_headlines, 'Prediksi Clickbait': previous_predictions})
-    st.dataframe(df)
+import matplotlib.pyplot as plt
 
-    # Example: Show a bar chart of clickbait vs. non-clickbait headlines
-    labels = ['Clickbait', 'Non-Clickbait']
-    values = [2, 1]
-    chart_data = pd.DataFrame({'Label': labels, 'Value': values})
-    st.bar_chart(chart_data['Value'], labels=chart_data['Label'])
+# Read the data from CSV
+data = pd.read_csv('https://raw.githubusercontent.com/adityafaadil/clickbait-classification-knn/main/dataset/data_bersih.csv')
 
-    # Example: Display the most common words in the previous headlines
-    word_frequency = {'clickbait': 10, 'berita': 8, 'judul': 5, 'bukan': 4, 'ini': 3}
-    st.subheader('Word Frequency')
-    st.write(word_frequency)
+# Set the page title and layout
+st.set_page_config(page_title='Clickbait Dashboard', layout='wide')
+
+# Display the dataset
+st.title('Clickbait Dashboard')
+st.subheader('Data')
+st.dataframe(data)
+
+# Show statistics
+st.subheader('Statistics')
+st.write('Total number of headlines:', len(data))
+st.write('Number of clickbait headlines:', len(data[data['label'] == 1]))
+st.write('Number of non-clickbait headlines:', len(data[data['label'] == 0]))
+
+# Show bar chart of label distribution
+st.subheader('Label Distribution')
+label_counts = data['label'].value_counts()
+plt.bar(label_counts.index, label_counts.values)
+plt.xlabel('Label')
+plt.ylabel('Count')
+st.pyplot(plt)
+
+# Show word cloud of headlines
+from wordcloud import WordCloud
+clickbait_text = ' '.join(data[data['label'] == 1]['headline'])
+non_clickbait_text = ' '.join(data[data['label'] == 0]['headline'])
+
+st.subheader('Word Cloud')
+st.write('Clickbait Headlines')
+wordcloud = WordCloud(width=800, height=400).generate(clickbait_text)
+plt.figure(figsize=(10, 5))
+plt.imshow(wordcloud, interpolation='bilinear')
+plt.axis('off')
+st.pyplot(plt)
+
+st.write('Non-Clickbait Headlines')
+wordcloud = WordCloud(width=800, height=400).generate(non_clickbait_text)
+plt.figure(figsize=(10, 5))
+plt.imshow(wordcloud, interpolation='bilinear')
+plt.axis('off')
+st.pyplot(plt)
 
 # Run the Streamlit app
 if __name__ == '__main__':
