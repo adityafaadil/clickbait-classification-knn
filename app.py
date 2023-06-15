@@ -45,53 +45,6 @@ def app():
         else:
             st.write('Judul berita ini bukan clickbait.')
 
-# Read the data from CSV
-data = pd.read_csv('dataset/data_bersih.csv')
-sample_size = 100  # Adjust this value to set the sample size
-data_sample = data.sample(n=sample_size, random_state=42)
-
-# Set the page title and layout
-st.set_page_config(page_title='Clickbait Dashboard', layout='wide')
-
-# Display the dataset
-st.title('Clickbait Dashboard')
-st.subheader('Data')
-st.dataframe(data_sample)
-
-# Show statistics
-st.subheader('Statistics')
-st.write('Total number of headlines:', len(data_sample))
-st.write('Number of clickbait headlines:', len(data_sample[data_sample['label'] == 1]))
-st.write('Number of non-clickbait headlines:', len(data_sample[data_sample['label'] == 0]))
-
-# Show bar chart of label distribution
-st.subheader('Label Distribution')
-label_counts = data_sample['label'].value_counts()
-plt.bar(label_counts.index, label_counts.values)
-plt.xlabel('Label')
-plt.ylabel('Count')
-st.pyplot(plt)
-
-# Show word cloud of headlines
-from wordcloud import WordCloud
-clickbait_text = ' '.join(data_sample[data_sample['label'] == 1]['headline'])
-non_clickbait_text = ' '.join(data_sample[data_sample['label'] == 0]['headline'])
-
-st.subheader('Word Cloud')
-st.write('Clickbait Headlines')
-wordcloud = WordCloud(width=800, height=400).generate(clickbait_text)
-plt.figure(figsize=(10, 5))
-plt.imshow(wordcloud, interpolation='bilinear')
-plt.axis('off')
-st.pyplot(plt)
-
-st.write('Non-Clickbait Headlines')
-wordcloud = WordCloud(width=800, height=400).generate(non_clickbait_text)
-plt.figure(figsize=(10, 5))
-plt.imshow(wordcloud, interpolation='bilinear')
-plt.axis('off')
-st.pyplot(plt)
-
 # Run the Streamlit app
 if __name__ == '__main__':
     app()
