@@ -1,10 +1,10 @@
 import streamlit as st
-import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 import joblib
 import re
 import string
+
 
 # Load the pre-trained model and vectorizer
 model = joblib.load('model/model.joblib')
@@ -44,7 +44,7 @@ def app():
             st.write('Judul berita ini clickbait.')
         else:
             st.write('Judul berita ini bukan clickbait.')
-
+    
 # Run the Streamlit app
 if __name__ == '__main__':
     app()
