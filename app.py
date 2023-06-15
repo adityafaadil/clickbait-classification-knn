@@ -1,4 +1,5 @@
 import streamlit as st
+import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 import joblib
@@ -43,8 +44,6 @@ def app():
             st.write('Judul berita ini clickbait.')
         else:
             st.write('Judul berita ini bukan clickbait.')
-
-import matplotlib.pyplot as plt
 
 # Read the data from CSV
 data = pd.read_csv('https://raw.githubusercontent.com/adityafaadil/clickbait-classification-knn/main/dataset/data_bersih.csv')
