@@ -1,8 +1,10 @@
 import streamlit as st
 import matplotlib.pyplot as plt
+import plotly.express as px
+from wordcloud import WordCloud
 import pandas as pd
 import numpy as np
-import plotly.express as px
+
 import joblib
 import re
 import string
@@ -92,12 +94,14 @@ def app():
 
         # Word cloud for clickbait articles
         clickbait_titles = ' '.join(df[df['label'] == 'clickbait']['title'])
-        fig = px.imshow(clickbait_titles, title="Word Cloud - Clickbait")
+        clickbait_wordcloud = WordCloud().generate(clickbait_titles)
+        fig = px.imshow(np.array(clickbait_wordcloud.to_image()), title="Word Cloud - Clickbait")
         st.plotly_chart(fig)
 
         # Word cloud for non-clickbait articles
         non_clickbait_titles = ' '.join(df[df['label'] == 'non-clickbait']['title'])
-        fig = px.imshow(non_clickbait_titles, title="Word Cloud - Non-clickbait")
+        non_clickbait_wordcloud = WordCloud().generate(non_clickbait_titles)
+        fig = px.imshow(np.array(non_clickbait_wordcloud.to_image()), title="Word Cloud - Non-clickbait")
         st.plotly_chart(fig)
 
 # Run the Streamlit app
