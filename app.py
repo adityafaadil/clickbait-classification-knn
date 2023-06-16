@@ -110,21 +110,23 @@ def app():
         buffer, col2, col3 = st.columns([1,10,10])
        
         with col2:
-           fig = px.bar(data, x='label', title='Clickbait vs Non-Clickbait Distribution')
-        
-           # Change the color of the bars
-           fig.update_traces(marker_color='blue')
-            
-           # Calculate the number of clickbait and non-clickbait
-           clickbait_count = len(data[data['label'] == 'clickbait'])
-           non_clickbait_count = len(data[data['label'] == 'non-clickbait'])
+            # Calculate the number of clickbait and non-clickbait
+            clickbait_count = len(df[df['label'] == 'clickbait'])
+            non_clickbait_count = len(df[df['label'] == 'non-clickbait'])
 
-           # Add text annotations to the chart
-           fig.update_traces(texttemplate='%{y}', textposition='outside')
-           fig.add_annotation(x='clickbait', y=clickbait_count, text=str(clickbait_count), showarrow=False)
-           fig.add_annotation(x='non-clickbait', y=non_clickbait_count, text=str(non_clickbait_count), showarrow=False)
+            # Create the bar chart
+            labels = ['Clickbait', 'Non-Clickbait']
+            counts = [clickbait_count, non_clickbait_count]
 
-           st.plotly_chart(fig)
+            plt.bar(labels, counts)
+
+            # Add labels and title
+            plt.xlabel('Label')
+            plt.ylabel('Count')
+            plt.title('Clickbait vs Non-Clickbait Distribution')
+
+            # Display the chart
+            plt.show()
             
         with col3:
             st.write('ini kolom 3')
