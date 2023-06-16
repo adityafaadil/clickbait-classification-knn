@@ -60,8 +60,18 @@ def app():
         st.title('Tampilan Dashboard')
         data = pd.read_csv('dataset/main.csv')
         # Display the loaded data
-        st.header("Data")
-        st.write(data)
+        # Add a sidebar for data selection
+        st.sidebar.title("Data Selection")
+
+        # Create a multiselect dropdown for column selection
+        selected_columns = st.sidebar.multiselect("Select Columns", data.columns)
+
+        # Filter the data based on selected columns
+        filtered_data = data[selected_columns]
+
+        # Display the filtered data
+        st.header("Filtered Data")
+        st.write(filtered_data)
 
 # Run the Streamlit app
 if __name__ == '__main__':
