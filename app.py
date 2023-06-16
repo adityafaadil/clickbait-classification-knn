@@ -28,6 +28,9 @@ def app():
     st.title('Clickbait Classification')
     st.write('Masukkan judul berita untuk diklasifikasi apakah itu clickbait atau tidak.')
     
+    # Create a dropdown menu with page selection options
+    page = st.sidebar.selectbox('Page', ['Classification', 'About'])
+    
     # Create a text input box for the user to enter a headline
     user_input = st.text_input('Judul berita:')
     
