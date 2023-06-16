@@ -91,25 +91,23 @@ def app():
 
         # Mengambil kata-kata non-clickbait yang paling sering muncul (misalnya, 10 kata teratas)
         top_non_clickbait_words = non_clickbait_words_freq.most_common(10)
-
-        
-        df = df[df["label"] == title_filter]
-        # Tampilkan kata-kata clickbait
-        st.write("Kata-kata Clickbait yang Paling Sering Muncul:")
-        for word, freq in top_clickbait_words:
-            st.write(f"{word}: {freq} kali")
-        # Tampilkan kata-kata non-clickbait
-        st.write("Kata-kata Non-Clickbait yang Paling Sering Muncul:")
-        for word, freq in top_non_clickbait_words:
-            st.write(f"{word}: {freq} kali")
         
         buffer, col2, col3, col4 = st.columns([1,7,7,7])
         
         with col2:
-            st.write("ini kolom 2")
+            df = df[df["label"] == title_filter]
+            # Tampilkan kata-kata clickbait
+            st.write("Kata-kata Clickbait yang Paling Sering Muncul:")
+            for word, freq in top_clickbait_words:
+                st.write(f"{word}: {freq} kali")
                 
         with col3:
-            st.write("And column 3")
+            df = df[df["label"] == title_filter]
+            # Tampilkan kata-kata non-clickbait
+            st.write("Kata-kata Non-Clickbait yang Paling Sering Muncul:")
+            for word, freq in top_non_clickbait_words:
+                st.write(f"{word}: {freq} kali")
+                
         with col4:
              st.write("This column is half the size of 2 and 3")
         
