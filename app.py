@@ -106,11 +106,7 @@ def app():
         buffer, col2, col3, col4 = st.columns([1,7,7,7])
         
         with col2:
-             # Word Cloud
-             wordcloud = WordCloud().generate(' '.join(df['title']))
-             fig_wordcloud = px.imshow(wordcloud)
-             fig_wordcloud.update_layout(title='Word Cloud')
-             st.plotly_chart(fig_wordcloud)
+            st.write("ini kolom 2")
                 
         with col3:
             st.write("And column 3")
