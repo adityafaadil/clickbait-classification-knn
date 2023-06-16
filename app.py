@@ -92,7 +92,7 @@ def app():
         # Mengambil kata-kata non-clickbait yang paling sering muncul (misalnya, 10 kata teratas)
         top_non_clickbait_words = non_clickbait_words_freq.most_common(10)
         
-        buffer, col2, col3, col4 = st.columns([1,7,7,7])
+        buffer, col2, col3 = st.columns([1,7,7])
         
         with col2:
             # Tampilkan kata-kata clickbait
@@ -106,8 +106,6 @@ def app():
             for word, freq in top_non_clickbait_words:
                 st.write(f"{word}: {freq} kali")
                 
-        with col4:
-             st.write("This column is half the size of 2 and 3")
         
 # Run the Streamlit app
 if __name__ == '__main__':
