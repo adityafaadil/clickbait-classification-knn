@@ -6,4 +6,3 @@ streamlit==1.4.0
 matplotlib==3.7.1
 wordcloud==1.9.2
 plotly-express==0.4.1
-collections==3.10
