@@ -62,13 +62,6 @@ def app():
     elif page == 'Dashboard':
         st.title('Tampilan Dashboard')
         df = pd.read_csv('dataset/main.csv')
-        # top-level filters
-        title_filter = st.selectbox("Select title", pd.unique(df["title"]))
-        # dataframe filter
-        df = df[df["title"] == title_filter]
-        
-        st.markdown("### Detailed Data View")
-        st.dataframe(df)
         
         # Show total number of articles
         total_articles = len(df)
