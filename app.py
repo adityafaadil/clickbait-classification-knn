@@ -74,7 +74,7 @@ def app():
         st.markdown("### Detailed Data View")
         st.dataframe(df)
         
-       # Menggabungkan semua teks berita clickbait
+        # Menggabungkan semua teks berita clickbait
         clickbait_texts = " ".join(df[df["label"] == ["clickbait"]["title"])
 
         # Menggabungkan semua teks berita non-clickbait
