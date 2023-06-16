@@ -111,14 +111,7 @@ def app():
        
         with col2:
            fig = px.bar(df, x='label', title='Clickbait vs Non-Clickbait Distribution')
-
-           # Set the background color to white
-           fig.update_layout(
-                plot_bgcolor='white',
-                paper_bgcolor='white'
-            )
-
-            st.plotly_chart(fig)
+           st.plotly_chart(fig)
             
         with col3:
             st.write('ini kolom 3')
