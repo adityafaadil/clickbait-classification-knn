@@ -78,20 +78,6 @@ def app():
         fig_wordcloud = px.imshow(wordcloud)
         fig_wordcloud.update_layout(title='Word Cloud')
         st.plotly_chart(fig_wordcloud)
-    
-        # Bar Chart
-        st.markdown("### Bar Chart")
-        bar_data = df['label'].value_counts()
-        fig_bar = go.Figure(data=go.Bar(x=df['title'].index, y=df['label']))
-        fig_bar.update_layout(title='Bar Chart')
-        st.plotly_chart(fig_bar)
-    
-        # Pie Chart
-        st.markdown("### Pie Chart")
-        pie_data = df['label'].value_counts()
-        fig_pie = go.Figure(data=go.Pie(labels=df['label'].index, values=pie_data))
-        fig_pie.update_layout(title='Pie Chart')
-        st.plotly_chart(fig_pie)
         
 # Run the Streamlit app
 if __name__ == '__main__':
