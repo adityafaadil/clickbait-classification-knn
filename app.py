@@ -110,8 +110,8 @@ def app():
         buffer, col2, col3 = st.columns([1,10,10])
        
         with col2:
-            clickbait_count = df[df['label'] == 'clickbait'].shape[0]
-            non_clickbait_count = df[df['label'] == 'non-clickbait'].shape[0]
+            clickbait_count = datas[datas['label'] == 'clickbait'].shape[0]
+            non_clickbait_count = datas[datas['label'] == 'non-clickbait'].shape[0]
 
             # Menampilkan informasi jumlah data
             print("Jumlah Data Clickbait:", clickbait_count)
