@@ -25,16 +25,18 @@ def preprocess_text(text):
 # Define the Streamlit app
 def app():
     st.set_page_config(page_title='Clickbait Classification', page_icon=':newspaper:', layout='wide')
-    st.title('Clickbait Classification')
 
     # Create a dropdown menu with page selection options
     page = st.sidebar.selectbox('Page', ['Halaman Utama', 'Klasifikasi', 'Dashboard'])
 
     if page == 'Halaman Utama':
+        st.title('Clickbait Classification')
         # Display the description of the program
         st.write('Ini adalah program klasifikasi clickbait. Program ini menggunakan model KNN untuk mengklasifikasikan apakah judul berita tersebut clickbait atau tidak.')
-        st.write('Algoritma yang digunakan dalam pemodelan ini yaitu KNN, dengan nilai k terbaik yaitu k=11 yang memiliki akurasi 72% dengan pembagian 80% data training dan 20% data testing.') 
+        st.write('Algoritma yang digunakan dalam pemodelan ini yaitu KNN, dengan nilai k terbaik yaitu k=11 yang memiliki akurasi 72% dengan pembagian 80% data training dan 20% data testing.')
+        
     elif page == 'Klasifikasi':
+        st.title('Pengujian Klasifikasi')
         st.write('Ini adalah program klasifikasi clickbait. Program ini menggunakan model KNN untuk mengklasifikasikan apakah judul berita tersebut clickbait atau tidak.')
         # Create a text input box for the user to enter a headline
         user_input = st.text_input('Judul berita:')
@@ -54,6 +56,7 @@ def app():
                 st.write('Judul berita ini bukan clickbait.')
 
     elif page == 'Dashboard':
+        st.title('Tampilan Dashboard')
         st.write('This is the About page. Here you can provide information about the project.')
 
 # Run the Streamlit app
