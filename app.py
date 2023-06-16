@@ -75,7 +75,7 @@ def app():
         st.dataframe(df)
         
         # Menggabungkan semua teks berita clickbait
-        clickbait_texts = " ".join(df[df["label"] == "clickbait"]["text"])
+        clickbait_texts = " ".join(df[df["label"] == "clickbait"]["title"])
 
         # Menghitung frekuensi kemunculan kata-kata clickbait
         clickbait_words_freq = Counter(clickbait_texts.split())
