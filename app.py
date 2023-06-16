@@ -63,9 +63,7 @@ def app():
         # top-level filters
         title_filter = st.selectbox("Select title", pd.unique(df["title"]))
         # dataframe filter
-        # df = df[df["title"] == title_filter]
-        clickbait_df = df[df['label'] == 'clickbait']
-        non_clickbait_df = df[df['label'] == 'non-clickbait']
+        df = df[df["title"] == title_filter]
         
         col1, col2 = st.columns(2)
         col1.write('# This is Column 1')
