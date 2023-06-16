@@ -75,7 +75,7 @@ def app():
         st.dataframe(df)
         
         # Menggabungkan semua teks berita clickbait
-        clickbait_texts = " ".join(df[df["label"] == ["clickbait"]["title"])
+        clickbait_texts = " ".join(df[df["label"] == "clickbait"]["title"])
 
         # Menggabungkan semua teks berita non-clickbait
         non_clickbait_texts = " ".join(df[df["label"] == ["non-clickbait"]["title"])
