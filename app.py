@@ -64,6 +64,9 @@ def app():
         title_filter = st.selectbox("Select title", pd.unique(df["title"]))
         # dataframe filter
         df = df[df["title"] == title_filter]
+        
+        st.markdown("### Detailed Data View")
+        st.dataframe(df)
 
 # Run the Streamlit app
 if __name__ == '__main__':
