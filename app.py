@@ -118,15 +118,16 @@ def app():
             labels = ['Clickbait', 'Non-Clickbait']
             counts = [clickbait_count, non_clickbait_count]
 
-            plt.bar(labels, counts)
+            fig, ax = plt.subplots()
+            ax.bar(labels, counts)
 
             # Add labels and title
-            plt.xlabel('Label')
-            plt.ylabel('Count')
-            plt.title('Clickbait vs Non-Clickbait Distribution')
+            ax.set_xlabel('Label')
+            ax.set_ylabel('Count')
+            ax.set_title('Clickbait vs Non-Clickbait Distribution')
 
-            # Display the chart
-            plt.show()
+            # Display the chart in Streamlit
+            st.pyplot(fig)
             
         with col3:
             st.write('ini kolom 3')
