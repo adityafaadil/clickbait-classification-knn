@@ -70,6 +70,18 @@ def app():
         df = df[df["label"] == title_filter]
         st.markdown("### Detailed Data View")
         st.dataframe(df)
+        
+        # Word cloud for clickbait articles
+        clickbait_titles = ' '.join(df[df['label'] == 'clickbait']['title'])
+        clickbait_wordcloud = WordCloud().generate_from_text(clickbait_titles)
+        fig = px.imshow(clickbait_wordcloud.to_array(), title="Word Cloud - Clickbait")
+        st.plotly_chart(fig)
+
+        # Word cloud for non-clickbait articles
+        non_clickbait_titles = ' '.join(df[df['label'] == 'non-clickbait']['title'])
+        non_clickbait_wordcloud = WordCloud().generate_from_text(non_clickbait_titles)
+        fig = px.imshow(non_clickbait_wordcloud.to_array(), title="Word Cloud - Non-clickbait")
+        st.plotly_chart(fig)
 
 # Run the Streamlit app
 if __name__ == '__main__':
