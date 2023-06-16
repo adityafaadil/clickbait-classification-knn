@@ -58,7 +58,7 @@ def app():
 
     elif page == 'Dashboard':
         st.title('Tampilan Dashboard')
-        data = pd.read_csv('dataset/data_bersih.csv')
+        data = pd.read_csv('dataset/main.csv')
         # Display the loaded data
         st.header("Data")
         st.write(data)
