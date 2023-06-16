@@ -77,18 +77,16 @@ def app():
         buffer, col2, col3, col4 = st.columns([1,4,4,2])
         
         with col2:
-            st.write("This is in column 2")
+             # Word Cloud
+             wordcloud = WordCloud().generate(' '.join(df['title']))
+             fig_wordcloud = px.imshow(wordcloud)
+             fig_wordcloud.update_layout(title='Word Cloud')
+             st.plotly_chart(fig_wordcloud)
+                
         with col3:
             st.write("And column 3")
         with col4:
              st.write("This column is half the size of 2 and 3")
-                
-        # Word Cloud
-        st.markdown("### Word Cloud")
-        wordcloud = WordCloud().generate(' '.join(df['title']))
-        fig_wordcloud = px.imshow(wordcloud)
-        fig_wordcloud.update_layout(title='Word Cloud')
-        st.plotly_chart(fig_wordcloud)
         
 # Run the Streamlit app
 if __name__ == '__main__':
