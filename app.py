@@ -65,6 +65,10 @@ def app():
         # dataframe filter
         df = df[df["title"] == title_filter]
         
+        col1, col2 = st.columns(2)
+        col1.write('# This is Column 1')
+        col2.write('# This is Column 2')
+        
         st.markdown("### Detailed Data View")
         st.dataframe(df)
 
