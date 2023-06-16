@@ -102,7 +102,7 @@ def app():
             # Tampilkan kata-kata non-clickbait
             st.write("Kata-kata Non-Clickbait yang Paling Sering Muncul:")
             for word, freq in top_non_clickbait_words:
-            st.write(f"{word}: {freq} kali")
+                st.write(f"{word}: {freq} kali")
         
         buffer, col2, col3, col4 = st.columns([1,7,7,7])
         
