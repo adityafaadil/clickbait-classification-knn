@@ -111,6 +111,16 @@ def app():
        
         with col2:
            fig = px.bar(data, x='label', title='Clickbait vs Non-Clickbait Distribution')
+            
+           # Calculate the number of clickbait and non-clickbait
+           clickbait_count = len(data[data['label'] == 'clickbait'])
+           non_clickbait_count = len(data[data['label'] == 'non-clickbait'])
+
+           # Add text annotations to the chart
+           fig.update_traces(texttemplate='%{y}', textposition='outside')
+           fig.add_annotation(x='clickbait', y=clickbait_count, text=str(clickbait_count), showarrow=False)
+           fig.add_annotation(x='non-clickbait', y=non_clickbait_count, text=str(non_clickbait_count), showarrow=False)
+
            st.plotly_chart(fig)
             
         with col3:
