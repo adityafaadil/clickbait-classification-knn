@@ -110,7 +110,22 @@ def app():
         buffer, col2, col3 = st.columns([1,10,10])
        
         with col2:
-            st.write('bgsd')
+            clickbait_count = data[data['label'] == 'clickbait'].shape[0]
+            non_clickbait_count = data[data['label'] == 'non-clickbait'].shape[0]
+
+            # Menampilkan informasi jumlah data
+            print("Jumlah Data Clickbait:", clickbait_count)
+            print("Jumlah Data Non-clickbait:", non_clickbait_count)
+
+            # Membuat diagram batang
+            categories = ['Clickbait', 'Non-clickbait']
+            counts = [clickbait_count, non_clickbait_count]
+
+            plt.bar(categories, counts)
+            plt.xlabel('Kategori Berita')
+            plt.ylabel('Jumlah Data')
+            plt.title('Jumlah Data Clickbait dan Non-clickbait')
+            plt.show()
             
         with col3:
             st.write('ini kolom 3')
