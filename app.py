@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+from collections import Counter
 
 import matplotlib.pyplot as plt
 import plotly.express as px
@@ -64,8 +65,7 @@ def app():
         st.title('Tampilan Dashboard')
         df = pd.read_csv('dataset/data_bersih.csv')
         df = df.drop('label_score', axis=1)
-        
-        
+       
         # top-level filters
         title_filter = st.selectbox("Select title", pd.unique(df["label"]))
         
@@ -73,6 +73,21 @@ def app():
         df = df[df["label"] == title_filter]
         st.markdown("### Detailed Data View")
         st.dataframe(df)
+        
+        # Menggabungkan semua teks berita clickbait
+        clickbait_texts = " ".join(df[df["label"] == "clickbait"]["text"])
+
+        # Menghitung frekuensi kemunculan kata-kata clickbait
+        clickbait_words_freq = Counter(clickbait_texts.split())
+
+        # Mengambil kata-kata clickbait yang paling sering muncul (misalnya, 10 kata teratas)
+        top_clickbait_words = clickbait_words_freq.most_common(10)
+        
+        if st.button("Analisis"):
+            # Tampilkan kata-kata clickbait
+            st.write("Kata-kata Clickbait yang Paling Sering Muncul:")
+            for word, freq in top_clickbait_words:
+                st.write(f"{word}: {freq} kali")
         
         buffer, col2, col3, col4 = st.columns([1,7,7,7])
         
