@@ -35,6 +35,7 @@ def app():
         st.write('This is a clickbait classification program. It uses a pre-trained model to classify whether a given news headline is clickbait or not.')
 
     elif page == 'Klasifikasi':
+          st.write('Ini adalah program klasifikasi clickbait. Program ini menggunakan model KNN untuk mengklasifikasikan apakah judul berita tersebut clickbait atau tidak.')
         # Create a text input box for the user to enter a headline
         user_input = st.text_input('Judul berita:')
         
