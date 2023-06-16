@@ -107,6 +107,16 @@ def app():
                 st.write(f"{word}: {freq} kali")
                 
         
+        buffer, col2, col3 = st.columns([1,10,10])
+       
+        with col2:
+            st.title("Pie Chart Example")
+            fig = px.pie(data, names='label', title='Clickbait vs Non-Clickbait Distribution')
+            st.plotly_chart(fig)
+            
+        with col3:
+            st.write('ini kolom 3')
+                  
 # Run the Streamlit app
 if __name__ == '__main__':
     app()
