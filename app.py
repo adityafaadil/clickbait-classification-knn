@@ -1,10 +1,10 @@
 import streamlit as st
+import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 import joblib
 import re
 import string
-
 
 # Load the pre-trained model and vectorizer
 model = joblib.load('model/model.joblib')
@@ -26,28 +26,35 @@ def preprocess_text(text):
 def app():
     st.set_page_config(page_title='Clickbait Classification', page_icon=':newspaper:', layout='wide')
     st.title('Clickbait Classification')
-    st.write('Masukkan judul berita untuk diklasifikasi apakah itu clickbait atau tidak.')
-    
+
     # Create a dropdown menu with page selection options
-    page = st.sidebar.selectbox('Page', ['Classification', 'About'])
-    
-    # Create a text input box for the user to enter a headline
-    user_input = st.text_input('Judul berita:')
-    
-    # Classify the headline if the user presses the 'Klasifikasi' button
-    if st.button('Klasifikasi'):
-        # Preprocess the user input
-        preprocessed_input = preprocess_text(user_input)
-        # Convert the preprocessed input into a feature vector
-        feature_vector = vectorizer.transform([preprocessed_input])
-        # Make a prediction using the pre-trained model
-        prediction = model.predict(feature_vector)[0]
-        # Display the prediction to the user
-        if prediction == 1:
-            st.write('Judul berita ini clickbait.')
-        else:
-            st.write('Judul berita ini bukan clickbait.')
-    
+    page = st.sidebar.selectbox('Page', ['Main Page', 'Dashboard', 'About'])
+
+    if page == 'Main Page':
+        # Display the description of the program
+        st.write('This is a clickbait classification program. It uses a pre-trained model to classify whether a given news headline is clickbait or not.')
+
+    elif page == 'Dashboard':
+        # Create a text input box for the user to enter a headline
+        user_input = st.text_input('Judul berita:')
+        
+        # Classify the headline if the user presses the 'Klasifikasi' button
+        if st.button('Klasifikasi'):
+            # Preprocess the user input
+            preprocessed_input = preprocess_text(user_input)
+            # Convert the preprocessed input into a feature vector
+            feature_vector = vectorizer.transform([preprocessed_input])
+            # Make a prediction using the pre-trained model
+            prediction = model.predict(feature_vector)[0]
+            # Display the prediction to the user
+            if prediction == 1:
+                st.write('Judul berita ini clickbait.')
+            else:
+                st.write('Judul berita ini bukan clickbait.')
+
+    elif page == 'About':
+        st.write('This is the About page. Here you can provide information about the project.')
+
 # Run the Streamlit app
 if __name__ == '__main__':
     app()
