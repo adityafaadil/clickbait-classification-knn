@@ -58,7 +58,14 @@ def app():
 
     elif page == 'Dashboard':
         st.title('Tampilan Dashboard')
-        st.write('This is the About page. Here you can provide information about the project.')
+        data = pd.read_csv('dataset/data_bersih.csv')
+        # Display the total number of clickbait and non-clickbait titles
+        clickbait_count = data['label'].sum()
+        non_clickbait_count = len(data) - clickbait_count
+        st.title('Clickbait Dashboard')
+        st.header('Total Titles')
+        st.write(f'Clickbait: {clickbait_count}')
+        st.write(f'Non-Clickbait: {non_clickbait_count}')
 
 # Run the Streamlit app
 if __name__ == '__main__':
