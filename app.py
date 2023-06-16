@@ -63,6 +63,8 @@ def app():
     elif page == 'Dashboard':
         st.title('Tampilan Dashboard')
         df = pd.read_csv('dataset/data_bersih.csv')
+        df = df.drop('label_score', axis=1)
+        
         
         # top-level filters
         title_filter = st.selectbox("Select title", pd.unique(df["label"]))
