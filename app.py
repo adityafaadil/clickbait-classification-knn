@@ -81,14 +81,14 @@ def app():
     
         # Bar Chart
         st.markdown("### Bar Chart")
-        bar_data = filtered_df['label'].value_counts()
+        bar_data = df['label'].value_counts()
         fig_bar = go.Figure(data=go.Bar(x=bar_data.index, y=bar_data))
         fig_bar.update_layout(title='Bar Chart')
         st.plotly_chart(fig_bar)
     
         # Pie Chart
         st.markdown("### Pie Chart")
-        pie_data = filtered_df['label'].value_counts()
+        pie_data = df['label'].value_counts()
         fig_pie = go.Figure(data=go.Pie(labels=pie_data.index, values=pie_data))
         fig_pie.update_layout(title='Pie Chart')
         st.plotly_chart(fig_pie)
