@@ -39,7 +39,7 @@ def app():
         
     elif page == 'Klasifikasi':
         st.title('Pengujian Klasifikasi')
-        st.write('Ini adalah program klasifikasi judul berita clickbait. Program ini menggunakan  model _K-Nearest Neighbor_(KNN) dengan menggunakan matrix _Euclidean Distance_ untuk mengklasifikasikan apakah judul berita tersebut clickbait atau tidak.')
+        st.write('Ini adalah Pengujian Klasifikasi. Pengujian ini menggunakan model _K-Nearest Neighbor_(KNN) dengan menggunakan matrix _Euclidean Distance_ untuk mengklasifikasikan apakah judul berita tersebut clickbait atau tidak.')
         # Create a text input box for the user to enter a headline
         user_input = st.text_input('Judul berita:')
         
