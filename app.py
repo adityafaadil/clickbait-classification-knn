@@ -110,7 +110,7 @@ def app():
         buffer, col2, col3 = st.columns([1,10,10])
        
         with col2:
-           fig = px.bar(df, x='label', title='Clickbait vs Non-Clickbait Distribution')
+           fig = px.bar(data, x='label', title='Clickbait vs Non-Clickbait Distribution')
            st.plotly_chart(fig)
             
         with col3:
