@@ -111,8 +111,8 @@ def app():
        
         with col2:
             # Calculate the number of clickbait and non-clickbait
-            clickbait_count = len(df[df['label'] == 'clickbait'])
-            non_clickbait_count = len(df[df['label'] == 'non-clickbait'])
+            clickbait_count = len(data[data['label'] == 'clickbait'])
+            non_clickbait_count = len(data[data['label'] == 'non-clickbait'])
 
             # Create the bar chart
             labels = ['Clickbait', 'Non-Clickbait']
