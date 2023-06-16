@@ -112,6 +112,12 @@ def app():
         with col2:
             fig = px.pie(data, names='label', title='Presentase jumlah judul berita clickbait dan non-clickbait')
             st.plotly_chart(fig)
+            # Set the background color to white
+            fig.update_layout(
+                plot_bgcolor='white',
+                paper_bgcolor='white'
+            )
+            st.plotly_chart(fig)
             
         with col3:
             st.write('ini kolom 3')
