@@ -110,8 +110,7 @@ def app():
         buffer, col2, col3 = st.columns([1,10,10])
        
         with col2:
-            st.title("Pie Chart Example")
-            fig = px.pie(data, names='label', title='Clickbait vs Non-Clickbait Distribution')
+            fig = px.pie(data, names='label', title='Presentase jumlah judul berita clickbait dan non-clickbait')
             st.plotly_chart(fig)
             
         with col3:
