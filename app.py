@@ -68,9 +68,37 @@ def app():
         st.markdown("### Detailed Data View")
         st.dataframe(df)
         
-        col1, col2 = st.columns(2)
-        col1.write('# This is Column 1')
-        col2.write('# This is Column 2')
+        # Show total number of articles
+        total_articles = len(df)
+        st.subheader(f"Jumlah Total Berita: {total_articles}")
+
+        # Show number of clickbait and non-clickbait articles
+        clickbait_count = len(df[df['label'] == 'clickbait'])
+        non_clickbait_count = len(df[df['label'] == 'non-clickbait'])
+        st.subheader("Jumlah Berita Clickbait dan Non-clickbait")
+        st.write(f"Clickbait: {clickbait_count}")
+        st.write(f"Non-clickbait: {non_clickbait_count}")
+
+        # Visualize the proportion of clickbait and non-clickbait articles
+        labels = ['Clickbait', 'Non-clickbait']
+        values = [clickbait_count, non_clickbait_count]
+        fig = px.pie(names=labels, values=values, title="Proporsi Berita Clickbait dan Non-clickbait")
+        st.plotly_chart(fig)
+
+        # Visualize the distribution of title length
+        df['title_length'] = df['title'].apply(len)
+        fig = px.histogram(df, x='title_length', nbins=20, title="Distribusi Panjang Judul Berita")
+        st.plotly_chart(fig)
+
+        # Word cloud for clickbait articles
+        clickbait_titles = ' '.join(df[df['label'] == 'clickbait']['title'])
+        fig = px.imshow(clickbait_titles, title="Word Cloud - Clickbait")
+        st.plotly_chart(fig)
+
+        # Word cloud for non-clickbait articles
+        non_clickbait_titles = ' '.join(df[df['label'] == 'non-clickbait']['title'])
+        fig = px.imshow(non_clickbait_titles, title="Word Cloud - Non-clickbait")
+        st.plotly_chart(fig)
 
 # Run the Streamlit app
 if __name__ == '__main__':
