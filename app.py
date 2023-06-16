@@ -75,10 +75,10 @@ def app():
         st.dataframe(df)
         
        # Menggabungkan semua teks berita clickbait
-        clickbait_texts = " ".join(df[df["label"] == "clickbait"]["title"])
+        clickbait_texts = " ".join(df[df["label"] == ["clickbait"]["title"])
 
         # Menggabungkan semua teks berita non-clickbait
-        non_clickbait_texts = " ".join(df[df["label"] == "non-clickbait"]["title"])
+        non_clickbait_texts = " ".join(df[df["label"] == ["non-clickbait"]["title"])
 
         # Menghitung frekuensi kemunculan kata-kata clickbait
         clickbait_words_freq = Counter(clickbait_texts.split())
@@ -110,8 +110,8 @@ def app():
         buffer, col2, col3 = st.columns([1,10,10])
        
         with col2:
-            clickbait_count = datas[datas['label'] == 'clickbait'].shape[0]
-            non_clickbait_count = datas[datas['label'] == 'non-clickbait'].shape[0]
+            clickbait_count = data[data['label'] == 'clickbait'].shape[0]
+            non_clickbait_count = data[data['label'] == 'non-clickbait'].shape[0]
 
             # Menampilkan informasi jumlah data
             print("Jumlah Data Clickbait:", clickbait_count)
