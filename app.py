@@ -28,13 +28,13 @@ def app():
     st.title('Clickbait Classification')
 
     # Create a dropdown menu with page selection options
-    page = st.sidebar.selectbox('Page', ['Main Page', 'Dashboard', 'About'])
+    page = st.sidebar.selectbox('Page', ['Halaman Utama', 'Klasifikasi', 'Dashboard'])
 
-    if page == 'Main Page':
+    if page == 'Halaman Utama':
         # Display the description of the program
         st.write('This is a clickbait classification program. It uses a pre-trained model to classify whether a given news headline is clickbait or not.')
 
-    elif page == 'Dashboard':
+    elif page == 'Klasifikasi':
         # Create a text input box for the user to enter a headline
         user_input = st.text_input('Judul berita:')
         
@@ -52,7 +52,7 @@ def app():
             else:
                 st.write('Judul berita ini bukan clickbait.')
 
-    elif page == 'About':
+    elif page == 'Dashboard':
         st.write('This is the About page. Here you can provide information about the project.')
 
 # Run the Streamlit app
