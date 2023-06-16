@@ -60,21 +60,10 @@ def app():
     elif page == 'Dashboard':
         st.title('Tampilan Dashboard')
         df = pd.read_csv('dataset/main.csv')
-        # Display the loaded data
-        # Add a sidebar for data selection
-        # Display the first few rows of the dataset
-        st.subheader('Dataset Overview')
-        st.dataframe(df.head())
-
-        # Display the dataset statistics
-        st.subheader('Dataset Statistics')
-        st.write(df.describe())
-
-        # Generate a bar chart of the target variable
-        st.subheader('Clickbait vs Non-Clickbait')
-        clickbait_counts = df['label'].value_counts()
-        fig = px.bar(x=clickbait_counts.index, y=clickbait_counts.values)
-        st.plotly_chart(fig)
+        # top-level filters
+        title_filter = st.selectbox("Select title", pd.unique(df["title"]))
+        # dataframe filter
+        df = df[df["title"] == title_filter]
 
 # Run the Streamlit app
 if __name__ == '__main__':
