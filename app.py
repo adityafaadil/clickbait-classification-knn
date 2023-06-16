@@ -74,7 +74,7 @@ def app():
         st.markdown("### Detailed Data View")
         st.dataframe(df)
         
-        buffer, col2, col3, col4 = st.columns([1,4,4,2])
+        buffer, col2, col3, col4 = st.columns([1,7,7,7])
         
         with col2:
              # Word Cloud
