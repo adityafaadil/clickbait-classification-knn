@@ -72,7 +72,7 @@ def app():
 
         # Generate a bar chart of the target variable
         st.subheader('Clickbait vs Non-Clickbait')
-        clickbait_counts = df['clickbait'].value_counts()
+        clickbait_counts = df['label'].value_counts()
         fig = px.bar(x=clickbait_counts.index, y=clickbait_counts.values)
         st.plotly_chart(fig)
 
