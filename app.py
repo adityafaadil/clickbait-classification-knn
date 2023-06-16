@@ -65,12 +65,12 @@ def app():
         # dataframe filter
         df = df[df["title"] == title_filter]
         
+        st.markdown("### Detailed Data View")
+        st.dataframe(df)
+        
         col1, col2 = st.columns(2)
         col1.write('# This is Column 1')
         col2.write('# This is Column 2')
-        
-        st.markdown("### Detailed Data View")
-        st.dataframe(df)
 
 # Run the Streamlit app
 if __name__ == '__main__':
