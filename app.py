@@ -71,23 +71,6 @@ def app():
         st.markdown("### Detailed Data View")
         st.dataframe(df)
         
-        # Show total number of articles
-        total_articles = len(df_filtered)
-        st.subheader(f"Jumlah Total Berita: {total_articles}")
-    
-        # Show proportion of clickbait and non-clickbait articles
-        clickbait_count = len(df_filtered[df_filtered['label'] == 'clickbait'])
-        non_clickbait_count = len(df_filtered[df_filtered['label'] == 'non-clickbait'])
-        st.subheader("Jumlah Berita Clickbait dan Non-clickbait")
-        st.write(f"Clickbait: {clickbait_count}")
-        st.write(f"Non-clickbait: {non_clickbait_count}")
-    
-        # Visualize the proportion of clickbait and non-clickbait articles
-        labels = ['Clickbait', 'Non-clickbait']
-        values = [clickbait_count, non_clickbait_count]
-        fig = px.pie(names=labels, values=values, title="Proporsi Berita Clickbait dan Non-clickbait")
-        st.plotly_chart(fig)
-        
 # Run the Streamlit app
 if __name__ == '__main__':
     app()
