@@ -112,11 +112,8 @@ def app():
         with col2:
            fig = px.bar(data, x='label', title='Clickbait vs Non-Clickbait Distribution')
         
-           # Set the background color to white
-           fig.update_layout(
-                plot_bgcolor='white',
-                paper_bgcolor='white'
-           )
+           # Change the color of the bars
+           fig.update_traces(marker_color='blue')
             
            # Calculate the number of clickbait and non-clickbait
            clickbait_count = len(data[data['label'] == 'clickbait'])
