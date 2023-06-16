@@ -61,7 +61,7 @@ def app():
 
     elif page == 'Dashboard':
         st.title('Tampilan Dashboard')
-        df = pd.read_csv('dataset/main.csv')
+        df = pd.read_csv('dataset/data_bersih.csv')
         
         # Show total number of articles
         total_articles = len(df)
