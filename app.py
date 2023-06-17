@@ -67,11 +67,11 @@ def app():
         df = data.drop('label_score', axis=1)
        
         # top-level filters
-        title_filter = st.selectbox("Select title", pd.unique(df["label"]))
+        title_filter = st.selectbox("Pilih Label klasifikasi", pd.unique(df["label"]))
         
         # dataframe filter
         df = df[df["label"] == title_filter]
-        st.markdown("### Detailed Data View")
+        st.markdown("### Detail data dari label yang dipilih")
         st.dataframe(df)
         
         # Menggabungkan semua teks berita clickbait
@@ -123,8 +123,8 @@ def app():
 
             # Add labels and title
             ax.set_xlabel('Label')
-            ax.set_ylabel('Count')
-            ax.set_title('Clickbait vs Non-Clickbait Distribution')
+            ax.set_ylabel('Jumlah')
+            ax.set_title('Jumlah Data clickbait dan non-clickbait')
 
             # Display the chart in Streamlit
             st.pyplot(fig)
@@ -132,7 +132,6 @@ def app():
         with col3:
             # Combine all text into a single string
             text = ' '.join(df['title'])
-
             # Create the word cloud
             wordcloud = WordCloud(width=800, height=600, background_color='white').generate(text)  
             # Display the word cloud using Streamlit
