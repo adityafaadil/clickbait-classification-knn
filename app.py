@@ -58,7 +58,7 @@ def app():
             # Display the prediction to the user
             if prediction == 1:
                 st.write('Judul berita ini clickbait.')
-            else:
+            elif prediction == 0:
                 st.write('Judul berita ini bukan clickbait.')
 
     elif page == 'Dashboard':
