@@ -136,7 +136,6 @@ def app():
             # Create the word cloud
             wordcloud = WordCloud(width=800, height=400, background_color='white').generate(text)  
             # Display the word cloud using Streamlit
-            st.title("Word Cloud Example")
             fig, ax = plt.subplots(figsize=(10, 5))
             plt.imshow(wordcloud, interpolation='bilinear')
             plt.axis('off')
