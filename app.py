@@ -65,7 +65,6 @@ def app():
         st.title('Tampilan Dashboard')
         data = pd.read_csv('dataset/data_bersih.csv')
         df = data.drop('label_score', axis=1)
-        df = df.head()
        
         # top-level filters
         title_filter = st.selectbox("Pilih Label klasifikasi", pd.unique(df["label"]))
