@@ -108,6 +108,11 @@ def app():
             ax.set_ylabel('Frekuensi')
             ax.set_title('Kata-kata Clickbait yang Paling Sering Muncul')
             plt.xticks(rotation=45)
+
+            # Menambahkan angka pada batang chart
+            for i, freq in enumerate(freqs):
+                ax.text(i, freq, str(freq), ha='center', va='bottom')
+                
             st.pyplot(fig)
 
         with col3:
@@ -145,11 +150,7 @@ def app():
             ax.set_xlabel('Label')
             ax.set_ylabel('Jumlah')
             ax.set_title('Jumlah Data clickbait dan non-clickbait')
-
-            # Menambahkan angka pada batang chart
-            for i, freq in enumerate(freqs):
-                ax.text(i, freq, str(freq), ha='center', va='bottom')
-                
+            
             # Display the chart in Streamlit
             st.pyplot(fig)
 
