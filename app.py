@@ -87,6 +87,9 @@ def app():
         # Mengubah jumlah kemunculan semua kata clickbait menjadi 500
         clickbait_words_freq = {word: freq * 5 if word.lower() in clickbait_keywords else freq for word, freq in clickbait_words_freq.items()}
 
+        # Mengubah clickbait_words_freq menjadi objek Counter
+        clickbait_words_freq = Counter(clickbait_words_freq)
+
         # Mengambil kata-kata clickbait yang paling sering muncul (misalnya, 10 kata teratas)
         top_clickbait_words = clickbait_words_freq.most_common(10)
 
