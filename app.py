@@ -36,14 +36,6 @@ def app():
 
     # Create a dropdown menu with page selection options
     page = st.sidebar.selectbox('Page', ['Halaman Utama', 'Klasifikasi', 'Dashboard'])
-
-    # Pisahkan dataset menjadi data latih dan data uji
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-    # Vektorisasi fitur menggunakan vectorizer
-    vectorizer = TfidfVectorizer()
-    X_train = vectorizer.fit_transform(X_train)
-    X_test = vectorizer.transform(X_test)
                 
     if page == 'Halaman Utama':
         st.title('Clickbait Classification')
@@ -71,10 +63,6 @@ def app():
                 st.write('Judul berita ini clickbait.')
             elif prediction == 0:
                 st.write('Judul berita ini bukan clickbait.')
-                
-            # Calculate the accuracy of the model
-            accuracy = model.score(X_test, y_test)
-            st.write(f'Akurasi model: {accuracy:.2f}')
 
     elif page == 'Dashboard':
         st.title('Tampilan Dashboard')
