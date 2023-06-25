@@ -98,8 +98,17 @@ def app():
         with col2:
             # Tampilkan kata-kata clickbait yang sesuai
             st.write("Kata-kata Clickbait yang Paling Sering Muncul:")
-            for word, freq in top_clickbait_words:
-                st.write(f"{word}: {freq} kali")
+            words = [word for word, freq in top_clickbait_words]
+            freqs = [freq for word, freq in top_clickbait_words]
+    
+            # Visualisasi sebagai grafik batang
+            fig, ax = plt.subplots()
+            ax.bar(words, freqs)
+            ax.set_xlabel('Kata-kata')
+            ax.set_ylabel('Frekuensi')
+            ax.set_title('Kata-kata Clickbait yang Paling Sering Muncul')
+            plt.xticks(rotation=45)
+            st.pyplot(fig)
 
         with col3:
             # Menggabungkan semua teks berita non-clickbait
