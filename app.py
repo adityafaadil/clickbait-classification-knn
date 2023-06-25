@@ -146,13 +146,11 @@ def app():
             ax.set_ylabel('Jumlah')
             ax.set_title('Jumlah Data clickbait dan non-clickbait')
 
-            # Display the chart in Streamlit
-            st.pyplot(fig)
-
             # Menambahkan angka pada batang chart
             for i, freq in enumerate(freqs):
                 ax.text(i, freq, str(freq), ha='center', va='bottom')
                 
+            # Display the chart in Streamlit
             st.pyplot(fig)
 
             
