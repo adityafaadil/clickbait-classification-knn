@@ -63,15 +63,17 @@ def app():
 
     elif page == 'Dashboard':
         st.title('Tampilan Dashboard')
-        
-        @st.cache
-        def load_data():
-            data = pd.read_csv('dataset/data_bersih.csv')
-            return data
-            
-        data = load_data()
+        data = pd.read_csv('dataset/data_bersih.csv')
         df = data.drop('label_score', axis=1)
         df = df.head()
+       
+        # top-level filters
+        title_filter = st.selectbox("Pilih Label klasifikasi", pd.unique(df["label"]))
+        
+        # dataframe filter
+        df = df[df["label"] == title_filter]
+        st.markdown("### Detail data dari label yang dipilih")
+        st.dataframe(df)
 
         # top-level filters
         title_filter = st.selectbox("Pilih Label klasifikasi", pd.unique(df["label"]))
