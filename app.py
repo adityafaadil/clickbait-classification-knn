@@ -63,11 +63,12 @@ def app():
 
     elif page == 'Dashboard':
         st.title('Tampilan Dashboard')
+        
         @st.cache
         def load_data():
             data = pd.read_csv('dataset/data_bersih.csv')
             return data
-
+            
         data = load_data()
         df = data.drop('label_score', axis=1)
         df = df.head()
