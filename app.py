@@ -81,6 +81,9 @@ def app():
         # Menggabungkan semua teks berita clickbait
         clickbait_texts = " ".join(data[data["label"] == "clickbait"]["title"])
 
+        # Menghitung frekuensi kemunculan kata-kata clickbait yang sesuai
+        clickbait_words_freq = Counter(word for word in clickbait_texts.split() if any(keyword in word.lower() for keyword in clickbait_keywords))
+
         # Mengubah jumlah kemunculan semua kata clickbait menjadi 500
         clickbait_words_freq = {word: freq * 5 if word.lower() in clickbait_keywords else freq for word, freq in clickbait_words_freq.items()}
 
