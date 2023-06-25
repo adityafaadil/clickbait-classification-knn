@@ -74,37 +74,41 @@ def app():
         st.markdown("### Detail data dari label yang dipilih")
         st.dataframe(df)
         
+        # Daftar kata-kata clickbait yang diinginkan
+        clickbait_keywords = ["viral", "waspada", "inilah", "wow", "heboh", "luar biasa", "fakta menarik", "cara mudah", "terungkap"]
+
         # Menggabungkan semua teks berita clickbait
         clickbait_texts = " ".join(data[data["label"] == "clickbait"]["title"])
-        
-        # Menggabungkan semua teks berita non-clickbait
-        non_clickbait_texts = " ".join(data[data["label"] == "non-clickbait"]["title"])
-        
-        # Menghitung frekuensi kemunculan kata-kata clickbait
-        clickbait_words_freq = Counter(clickbait_texts.split())
-                                          
-        # Menghitung frekuensi kemunculan kata-kata non-clickbait
-        non_clickbait_words_freq = Counter(non_clickbait_texts.split())
+
+        # Menghitung frekuensi kemunculan kata-kata clickbait yang sesuai
+        clickbait_words_freq = Counter(word for word in clickbait_texts.split() if any(keyword in word.lower() for keyword in clickbait_keywords))
 
         # Mengambil kata-kata clickbait yang paling sering muncul (misalnya, 10 kata teratas)
         top_clickbait_words = clickbait_words_freq.most_common(10)
-                                          
-        # Mengambil kata-kata non-clickbait yang paling sering muncul (misalnya, 10 kata teratas)
-        top_non_clickbait_words = non_clickbait_words_freq.most_common(10)
-        
-        buffer, col2, col3 = st.columns([1,7,7])
-        
+
+        buffer, col2, col3 = st.columns([1, 7, 7])
+    
         with col2:
-            # Tampilkan kata-kata clickbait
+            # Tampilkan kata-kata clickbait yang sesuai
             st.write("Kata-kata Clickbait yang Paling Sering Muncul:")
             for word, freq in top_clickbait_words:
                 st.write(f"{word}: {freq} kali")
-                
+
         with col3:
+            # Menggabungkan semua teks berita non-clickbait
+            non_clickbait_texts = " ".join(data[data["label"] == "non-clickbait"]["title"])
+
+            # Menghitung frekuensi kemunculan kata-kata non-clickbait
+            non_clickbait_words_freq = Counter(non_clickbait_texts.split())
+
+            # Mengambil kata-kata non-clickbait yang paling sering muncul (misalnya, 10 kata teratas)
+            top_non_clickbait_words = non_clickbait_words_freq.most_common(10)
+
             # Tampilkan kata-kata non-clickbait
             st.write("Kata-kata Non-Clickbait yang Paling Sering Muncul:")
             for word, freq in top_non_clickbait_words:
                 st.write(f"{word}: {freq} kali")
+
                 
         
         buffer, col2, col3 = st.columns([1,10,10])
