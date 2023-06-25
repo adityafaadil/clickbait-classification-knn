@@ -7,6 +7,9 @@ import matplotlib.pyplot as plt
 import plotly.express as px
 from wordcloud import WordCloud
 
+from sklearn.model_selection import train_test_split
+from sklearn.feature_extraction.text import TfidfVectorizer
+
 import joblib
 import re
 import string
@@ -60,6 +63,14 @@ def app():
                 st.write('Judul berita ini clickbait.')
             elif prediction == 0:
                 st.write('Judul berita ini bukan clickbait.')
+
+            # Pisahkan dataset menjadi data latih dan data uji
+            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+            # Vektorisasi fitur menggunakan vectorizer
+            vectorizer = TfidfVectorizer()
+            X_train = vectorizer.fit_transform(X_train)
+            X_test = vectorizer.transform(X_test)
                 
             # Calculate the accuracy of the model
             accuracy = model.score(X_test, y_test)
