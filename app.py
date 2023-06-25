@@ -75,8 +75,8 @@ def app():
         st.dataframe(df)
         
         # Daftar kata-kata clickbait yang diinginkan
-        clickbait_keywords = ["viral", "waspada", "inilah", "wow", "heboh", "luar biasa", "fakta menarik", "cara mudah", "terungkap", "bukan main",
-                             "membuat tercengang", "sensasional", "mengguncang", "terkejut", "beredar luas", "trending", "diluar logika"]
+        clickbait_keywords = ["viral", "waspada", "inilah", "wow", "heboh", "eksklusif", "menarik", "fakta", "cara mudah", "terungkap", "menghebohkan",
+                              "membuat tercengang", "sensasional", "mengguncang", "terkejut", "beredar luas", "trending", "dahsyat", "terkuak", "misteri"]
 
         # Menggabungkan semua teks berita clickbait
         clickbait_texts = " ".join(data[data["label"] == "clickbait"]["title"])
