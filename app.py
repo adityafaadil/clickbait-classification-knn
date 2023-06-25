@@ -125,10 +125,25 @@ def app():
             # Mengambil kata-kata non-clickbait yang paling sering muncul (misalnya, 10 kata teratas)
             top_non_clickbait_words = non_clickbait_words_freq.most_common(10)
 
-            # Tampilkan kata-kata non-clickbait
-            st.write("Kata-kata Non-Clickbait yang Paling Sering Muncul:")
-            for word, freq in top_non_clickbait_words:
-                st.write(f"{word}: {freq} kali")
+           # Tampilkan kata-kata non-clickbait yang sesuai
+            st.write("Kata-kata non-clickbait yang Paling Sering Muncul:")
+            words = [word for word, freq in top_non_clickbait_words]
+            freqs = [freq for word, freq in top_non_clickbait_words]
+    
+            # Visualisasi sebagai grafik batang
+            fig, ax = plt.subplots()
+            ax.bar(words, freqs)
+            ax.set_xlabel('Kata-kata')
+            ax.set_ylabel('Frekuensi')
+            ax.set_title('Kata-kata non-clickbait yang Paling Sering Muncul')
+            plt.xticks(rotation=45)
+
+            # Menambahkan angka pada batang chart
+            for i, freq in enumerate(freqs):
+                ax.text(i, freq, str(freq), ha='center', va='bottom')
+                
+            st.pyplot(fig)
+
 
                 
         
