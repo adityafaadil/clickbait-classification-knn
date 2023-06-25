@@ -55,17 +55,15 @@ def app():
             feature_vector = vectorizer.transform([preprocessed_input])
             # Make a prediction using the pre-trained model
             prediction = model.predict(feature_vector)[0]
-            # Calculate the prediction probabilities
-            probabilities = model.predict_proba(feature_vector)[0]
             # Display the prediction to the user
             if prediction == 1:
                 st.write('Judul berita ini clickbait.')
             elif prediction == 0:
                 st.write('Judul berita ini bukan clickbait.')
                 
-            # Calculate the accuracy of the prediction
-            accuracy = probabilities.max()
-            st.write(f'Akurasi prediksi: {accuracy:.2f}')
+            # Calculate the accuracy of the model
+            accuracy = model.score(X_test, y_test)
+            st.write(f'Akurasi model: {accuracy:.2f}')
 
     elif page == 'Dashboard':
         st.title('Tampilan Dashboard')
