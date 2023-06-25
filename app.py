@@ -60,6 +60,10 @@ def app():
                 st.write('Judul berita ini clickbait.')
             elif prediction == 0:
                 st.write('Judul berita ini bukan clickbait.')
+                
+            # Calculate the accuracy of the prediction
+            accuracy = probabilities.max()
+            st.write(f'Akurasi prediksi: {accuracy:.2f}')
 
     elif page == 'Dashboard':
         st.title('Tampilan Dashboard')
