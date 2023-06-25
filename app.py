@@ -74,14 +74,6 @@ def app():
         df = df[df["label"] == title_filter]
         st.markdown("### Detail data dari label yang dipilih")
         st.dataframe(df)
-
-        # top-level filters
-        title_filter = st.selectbox("Pilih Label klasifikasi", pd.unique(df["label"]))
-
-        # dataframe filter
-        df = df[df["label"] == title_filter]
-        st.markdown("### Detail data dari label yang dipilih")
-        st.dataframe(df)
         
         # Daftar kata-kata clickbait yang diinginkan
         clickbait_keywords = ["viral", "waspada", "inilah", "wow", "heboh", "eksklusif", "menarik", "fakta", "cara mudah", "terungkap", "menghebohkan",
