@@ -166,6 +166,10 @@ def app():
             ax.set_ylabel('Jumlah')
             ax.set_title('Jumlah Data clickbait dan non-clickbait')
             
+            # Add text labels to the bars
+            for i, count in enumerate(counts):
+                ax.text(i, count, str(count), ha='center', va='bottom')
+
             # Display the chart in Streamlit
             st.pyplot(fig)
 
