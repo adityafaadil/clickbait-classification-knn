@@ -65,6 +65,7 @@ def app():
         st.title('Tampilan Dashboard')
         data = pd.read_csv('dataset/data_bersih.csv')
         df = data.drop('label_score', axis=1)
+        df = df.head()
        
         # top-level filters
         title_filter = st.selectbox("Pilih Label klasifikasi", pd.unique(df["label"]))
@@ -143,9 +144,6 @@ def app():
                 ax.text(i, freq, str(freq), ha='center', va='bottom')
                 
             st.pyplot(fig)
-
-
-                
         
         buffer, col2, col3 = st.columns([1,10,10])
        
@@ -172,8 +170,7 @@ def app():
 
             # Display the chart in Streamlit
             st.pyplot(fig)
-
-            
+    
         with col3:
             # Combine all text into a single string
             text = ' '.join(df['title'])
