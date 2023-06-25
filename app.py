@@ -152,8 +152,8 @@ def app():
             # Menambahkan angka pada batang chart
             for i, freq in enumerate(freqs):
                 ax.text(i, freq, str(freq), ha='center', va='bottom')
-    
-    st.pyplot(fig)
+                
+            st.pyplot(fig)
 
             
         with col3:
