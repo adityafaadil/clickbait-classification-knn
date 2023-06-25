@@ -7,9 +7,6 @@ import matplotlib.pyplot as plt
 import plotly.express as px
 from wordcloud import WordCloud
 
-from sklearn.model_selection import train_test_split
-from sklearn.feature_extraction.text import TfidfVectorizer
-
 import joblib
 import re
 import string
