@@ -148,6 +148,13 @@ def app():
 
             # Display the chart in Streamlit
             st.pyplot(fig)
+
+            # Menambahkan angka pada batang chart
+            for i, freq in enumerate(freqs):
+                ax.text(i, freq, str(freq), ha='center', va='bottom')
+    
+    st.pyplot(fig)
+
             
         with col3:
             # Combine all text into a single string
