@@ -84,7 +84,7 @@ def app():
         clickbait_words_freq = Counter(word for word in clickbait_texts.split() if any(keyword in word.lower() for keyword in clickbait_keywords))
 
         # Mengubah jumlah kemunculan semua kata clickbait menjadi 500
-        clickbait_words_freq = {word: freq * 10 if word.lower() in clickbait_keywords else freq for word, freq in clickbait_words_freq.items()}
+        clickbait_words_freq = {word: freq * 30 if word.lower() in clickbait_keywords else freq for word, freq in clickbait_words_freq.items()}
 
         # Mengubah clickbait_words_freq menjadi objek Counter
         clickbait_words_freq = Counter(clickbait_words_freq)
@@ -125,7 +125,7 @@ def app():
             non_clickbait_words_freq = Counter(word for word in non_clickbait_texts.split() if any(keyword in word.lower() for keyword in non_clickbait_keywords))
 
             # Mengubah jumlah kemunculan semua kata clickbait menjadi 500
-            non_clickbait_words_freq = {word: freq * 10 if word.lower() in non_clickbait_keywords else freq for word, freq in non_clickbait_words_freq.items()}
+            non_clickbait_words_freq = {word: freq * 30 if word.lower() in non_clickbait_keywords else freq for word, freq in non_clickbait_words_freq.items()}
 
             # Mengubah clickbait_words_freq menjadi objek Counter
             non_clickbait_words_freq = Counter(non_clickbait_words_freq)
