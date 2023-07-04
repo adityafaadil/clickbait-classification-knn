@@ -85,6 +85,7 @@ def app():
             "terungkap": 110,
             "trending": 85,
             "dahsyat": 75,
+            "aneh": 20,
             "misteri": 105
         }
 
