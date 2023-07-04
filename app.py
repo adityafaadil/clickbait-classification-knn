@@ -76,7 +76,7 @@ def app():
         
         # Daftar kata-kata clickbait yang diinginkan beserta angka pengali yang ditentukan
         clickbait_keywords = {
-            "viral": 50,
+            "viral": 10,
             "waspada": 120,
             "inilah": 80,
             "wow": 100,
