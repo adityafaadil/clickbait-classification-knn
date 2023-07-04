@@ -130,7 +130,7 @@ def app():
             # Daftar kata-kata clickbait yang diinginkan
             non_clickbait_keywords = {"informasi": 55, 
                                       "tips": 298, 
-                                      "fakta": 125, 
+                                      "fakta": 124, 
                                       "panduan": 154, 
                                       "pemahaman": 53, 
                                       "analisis": 71, 
