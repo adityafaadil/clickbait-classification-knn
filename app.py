@@ -128,7 +128,16 @@ def app():
 
         with col3:
             # Daftar kata-kata clickbait yang diinginkan
-            non_clickbait_keywords = ["informasi", "tips", "fakta", "panduan", "pemahaman", "analisis", "penjelasan", "saran", "solusi", "review"]
+            non_clickbait_keywords = ["informasi": 10, 
+                                      "tips": 50, 
+                                      "fakta": 80, 
+                                      "panduan": 100, 
+                                      "pemahaman": 50, 
+                                      "analisis": 70, 
+                                      "penjelasan": 110, 
+                                      "saran": 85, 
+                                      "solusi": 75, 
+                                      "review": 20]
 
             # Menggabungkan semua teks berita non-clickbait
             non_clickbait_texts = " ".join(data[data["label"] == "non-clickbait"]["title"])
@@ -137,7 +146,7 @@ def app():
             non_clickbait_words_freq = Counter(word for word in non_clickbait_texts.split() if any(keyword in word.lower() for keyword in non_clickbait_keywords))
 
             # Mengubah jumlah kemunculan semua kata clickbait menjadi 500
-            non_clickbait_words_freq = {word: freq * 30 if word.lower() in non_clickbait_keywords else freq for word, freq in non_clickbait_words_freq.items()}
+            non_clickbait_words_freq = {word: freq * non_clickbait_keywords if word.lower() in non_clickbait_keywords else freq for word, freq in non_clickbait_words_freq.items()}
 
             # Mengubah clickbait_words_freq menjadi objek Counter
             non_clickbait_words_freq = Counter(non_clickbait_words_freq)
