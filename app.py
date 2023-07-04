@@ -121,12 +121,18 @@ def app():
             # Menggabungkan semua teks berita non-clickbait
             non_clickbait_texts = " ".join(data[data["label"] == "non-clickbait"]["title"])
 
-            # Menghitung frekuensi kemunculan kata-kata non-clickbait
-            non_clickbait_words_freq = Counter(non_clickbait_texts.split())
+            # Menghitung frekuensi kemunculan kata-kata clickbait yang sesuai
+            non_clickbait_words_freq = Counter(word for word in non_clickbait_texts.split() if any(keyword in word.lower() for keyword in non_clickbait_keywords))
 
-            # Mengambil kata-kata non-clickbait yang paling sering muncul (misalnya, 10 kata teratas)
-            top_non_clickbait_words = non_clickbait_words_freq.most_common(10)
+            # Mengubah jumlah kemunculan semua kata clickbait menjadi 500
+            non_clickbait_words_freq = {word: freq * 10 if word.lower() in non_clickbait_keywords else freq for word, freq in non_clickbait_words_freq.items()}
 
+            # Mengubah clickbait_words_freq menjadi objek Counter
+            non_clickbait_words_freq = Counter(non_clickbait_words_freq)
+
+            # Mengambil kata-kata clickbait yang paling sering muncul (misalnya, 10 kata teratas)
+            top_non_clickbait_words = non_clickbait_words_freq.most_common(15)
+            
            # Tampilkan kata-kata non-clickbait yang sesuai
             st.write("Kata-kata non-clickbait yang Paling Sering Muncul:")
             words = [word for word, freq in top_non_clickbait_words]
