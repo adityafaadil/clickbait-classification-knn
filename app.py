@@ -137,7 +137,7 @@ def app():
                                       "penjelasan": 110, 
                                       "saran": 80, 
                                       "solusi": 120, 
-                                      "review": 100,
+                                      "review": 102,
                                       "relevan": 108,
                                       "ilmiah": 100,
                                       "penting":100,
