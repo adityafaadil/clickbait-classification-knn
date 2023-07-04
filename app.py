@@ -82,13 +82,9 @@ def app():
             "wow": 100,
             "heboh": 50,
             "eksklusif": 70,
-            "menarik": 60,
             "terungkap": 110,
-            "sensasional": 95,
-            "terkejut": 130,
             "trending": 85,
             "dahsyat": 75,
-            "terkuak": 140,
             "misteri": 105
         }
 
