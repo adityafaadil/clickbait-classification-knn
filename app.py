@@ -90,7 +90,7 @@ def app():
         clickbait_words_freq = Counter(clickbait_words_freq)
 
         # Mengambil kata-kata clickbait yang paling sering muncul (misalnya, 10 kata teratas)
-        top_clickbait_words = clickbait_words_freq.most_common(15)
+        top_clickbait_words = clickbait_words_freq.most_common(10)
 
         buffer, col2, col3 = st.columns([1, 7, 7])
     
@@ -131,7 +131,7 @@ def app():
             non_clickbait_words_freq = Counter(non_clickbait_words_freq)
 
             # Mengambil kata-kata clickbait yang paling sering muncul (misalnya, 10 kata teratas)
-            top_non_clickbait_words = non_clickbait_words_freq.most_common(15)
+            top_non_clickbait_words = non_clickbait_words_freq.most_common(10)
             
            # Tampilkan kata-kata non-clickbait yang sesuai
             st.write("Kata-kata non-clickbait yang Paling Sering Muncul:")
