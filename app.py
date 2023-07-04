@@ -75,8 +75,7 @@ def app():
         st.dataframe(df)
         
         # Daftar kata-kata clickbait yang diinginkan
-        clickbait_keywords = ["viral", "waspada", "inilah", "wow", "heboh", "eksklusif", "menarik", "fakta", "cara mudah", "terungkap", "menghebohkan",
-                              "membuat tercengang", "sensasional", "mengguncang", "terkejut", "beredar luas", "trending", "dahsyat", "terkuak", "misteri"]
+        clickbait_keywords = ["viral", "waspada", "inilah", "wow", "heboh", "eksklusif", "menarik", "terungkap", "sensasional", "terkejut", "trending", "dahsyat", "terkuak", "misteri"]
 
         # Menggabungkan semua teks berita clickbait
         clickbait_texts = " ".join(data[data["label"] == "clickbait"]["title"])
@@ -91,7 +90,7 @@ def app():
         clickbait_words_freq = Counter(clickbait_words_freq)
 
         # Mengambil kata-kata clickbait yang paling sering muncul (misalnya, 10 kata teratas)
-        top_clickbait_words = clickbait_words_freq.most_common(10)
+        top_clickbait_words = clickbait_words_freq.most_common(15)
 
         buffer, col2, col3 = st.columns([1, 7, 7])
     
@@ -116,6 +115,9 @@ def app():
             st.pyplot(fig)
 
         with col3:
+            # Daftar kata-kata clickbait yang diinginkan
+            clickbait_keywords = ["informasi", "tips", "fakta", "panduan", "pemahaman", "analisis", "penjelasan", "saran", "solusi", "review"]
+
             # Menggabungkan semua teks berita non-clickbait
             non_clickbait_texts = " ".join(data[data["label"] == "non-clickbait"]["title"])
 
