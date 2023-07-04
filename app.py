@@ -128,18 +128,18 @@ def app():
 
         with col3:
             # Daftar kata-kata clickbait yang diinginkan
-            non_clickbait_keywords = {"informasi": 10, 
-                                      "tips": 50, 
-                                      "fakta": 80, 
-                                      "panduan": 100, 
+            non_clickbait_keywords = {"informasi": 50, 
+                                      "tips": 200, 
+                                      "fakta": 90, 
+                                      "panduan": 150, 
                                       "pemahaman": 50, 
                                       "analisis": 70, 
                                       "penjelasan": 110, 
-                                      "saran": 85, 
-                                      "solusi": 75, 
-                                      "review": 20,
-                                      "relevan": 20,
-                                      "ilmiah": 40
+                                      "saran": 100, 
+                                      "solusi": 100, 
+                                      "review": 100,
+                                      "relevan": 100,
+                                      "ilmiah": 100
                                      }
 
             # Menggabungkan semua teks berita non-clickbait
