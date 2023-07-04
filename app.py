@@ -140,7 +140,7 @@ def app():
                                       "review": 100,
                                       "relevan": 100,
                                       "ilmiah": 100,
-                                      "terbaru": 100
+                                      "menarik": 100
                                      }
 
             # Menggabungkan semua teks berita non-clickbait
