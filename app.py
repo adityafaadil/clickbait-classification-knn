@@ -116,7 +116,7 @@ def app():
 
         with col3:
             # Daftar kata-kata clickbait yang diinginkan
-            clickbait_keywords = ["informasi", "tips", "fakta", "panduan", "pemahaman", "analisis", "penjelasan", "saran", "solusi", "review"]
+            non_clickbait_keywords = ["informasi", "tips", "fakta", "panduan", "pemahaman", "analisis", "penjelasan", "saran", "solusi", "review"]
 
             # Menggabungkan semua teks berita non-clickbait
             non_clickbait_texts = " ".join(data[data["label"] == "non-clickbait"]["title"])
