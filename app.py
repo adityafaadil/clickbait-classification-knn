@@ -138,7 +138,8 @@ def app():
                                       "saran": 85, 
                                       "solusi": 75, 
                                       "review": 20,
-                                      "relevan": 20
+                                      "relevan": 20,
+                                      "ilmiah": 40
                                      }
 
             # Menggabungkan semua teks berita non-clickbait
