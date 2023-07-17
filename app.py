@@ -62,7 +62,7 @@ def app():
                 st.write('Judul berita ini bukan clickbait.')
 
     elif page == 'Dashboard':
-          st.title('Tampilan Dashboard')
+        st.title('Tampilan Dashboard')
         data = pd.read_csv('dataset/data_bersih.csv')
         df = data.drop('label_score', axis=1)
        
