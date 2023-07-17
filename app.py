@@ -64,7 +64,7 @@ def app():
     elif page == 'Dashboard':
         st.title('Contoh Dashboard Tableau di Streamlit')
         st.markdown('Berikut adalah dashboard Tableau:')
-        st.markdown('<iframe src="https://public.tableau.com/app/profile/fadila.aditya/viz/Dashboard_Clickbait/Dashboard1?publish=yes" width="1000" height="600" frameborder="0" scrolling="yes"></iframe>', unsafe_allow_html=True)
+        st.markdown('<iframe src="https://public.tableau.com/views/Dashboard_Clickbait/Dashboard1?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_links" width="1000" height="600" frameborder="0" scrolling="yes"></iframe>', unsafe_allow_html=True)
                   
 # Run the Streamlit app
 if __name__ == '__main__':
