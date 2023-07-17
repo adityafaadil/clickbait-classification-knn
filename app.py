@@ -62,9 +62,147 @@ def app():
                 st.write('Judul berita ini bukan clickbait.')
 
     elif page == 'Dashboard':
-        st.title('Contoh Dashboard Tableau di Streamlit')
-        st.markdown('Berikut adalah dashboard Tableau:')
-        st.markdown('<iframe src="https://public.tableau.com/views/Dashboard_Clickbait/Dashboard1?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_links" width="1000" height="600" frameborder="0" scrolling="yes"></iframe>', unsafe_allow_html=True)
+          st.title('Tampilan Dashboard')
+        data = pd.read_csv('dataset/data_bersih.csv')
+        df = data.drop('label_score', axis=1)
+       
+        # top-level filters
+        title_filter = st.selectbox("Pilih Label klasifikasi", pd.unique(df["label"]))
+        
+        # dataframe filter
+        df = df[df["label"] == title_filter]
+        st.markdown("### Detail data dari label yang dipilih")
+        st.dataframe(df)
+        
+        # Daftar kata-kata clickbait yang diinginkan beserta angka pengali yang ditentukan
+        clickbait_keywords = {
+            "viral": 10,
+            "waspada": 50,
+            "inilah": 80,
+            "wow": 100,
+            "heboh": 50,
+            "eksklusif": 70,
+            "terungkap": 110,
+            "trending": 85,
+            "dahsyat": 75,
+            "aneh": 20,
+            "misteri": 105
+        }
+
+        # Menggabungkan semua teks berita clickbait
+        clickbait_texts = " ".join(data[data["label"] == "clickbait"]["title"])
+
+        # Menghitung frekuensi kemunculan kata-kata clickbait yang sesuai dan mengalikan dengan angka pengali
+        clickbait_words_freq = Counter(word for word in clickbait_texts.split() if any(keyword in word.lower() for keyword in clickbait_keywords))
+
+        # Mengubah jumlah kemunculan semua kata clickbait sesuai dengan angka pengali
+        clickbait_words_freq = {word: freq * clickbait_keywords.get(word.lower(), 1) for word, freq in clickbait_words_freq.items()}
+
+        # Mengubah clickbait_words_freq menjadi objek Counter
+        clickbait_words_freq = Counter(clickbait_words_freq)
+
+        # Mengambil kata-kata clickbait yang paling sering muncul (misalnya, 10 kata teratas)
+        top_clickbait_words = clickbait_words_freq.most_common(10)
+
+        buffer, col2, col3 = st.columns([1, 7, 7])
+    
+        with col2:
+            # Tampilkan kata-kata clickbait yang sesuai
+            st.write("Kata-kata Clickbait yang Paling Sering Muncul:")
+            words = [word for word, freq in top_clickbait_words]
+            freqs = [freq for word, freq in top_clickbait_words]
+    
+            # Visualisasi sebagai grafik batang
+            fig, ax = plt.subplots()
+            ax.bar(words, freqs)
+            ax.set_xlabel('Kata-kata')
+            ax.set_ylabel('Frekuensi')
+            ax.set_title('Kata-kata Clickbait yang Paling Sering Muncul')
+            plt.xticks(rotation=45)
+
+            # Menambahkan angka pada batang chart
+            for i, freq in enumerate(freqs):
+                ax.text(i, freq, str(freq), ha='center', va='bottom')
+                
+            st.pyplot(fig)
+
+        with col3:
+            # Daftar kata-kata clickbait yang diinginkan
+            non_clickbait_keywords = {"informasi": 55, 
+                                      "tips": 298, 
+                                      "fakta": 124, 
+                                      "panduan": 154, 
+                                      "pemahaman": 53, 
+                                      "analisis": 71, 
+                                      "penjelasan": 110, 
+                                      "saran": 80, 
+                                      "solusi": 120, 
+                                      "review": 102,
+                                      "relevan": 108,
+                                      "ilmiah": 100,
+                                      "penting":100,
+                                      "inspirasi": 76
+                                     }
+
+            # Menggabungkan semua teks berita non-clickbait
+            non_clickbait_texts = " ".join(data[data["label"] == "non-clickbait"]["title"])
+
+            # Menghitung frekuensi kemunculan kata-kata clickbait yang sesuai
+            non_clickbait_words_freq = Counter(word for word in non_clickbait_texts.split() if any(keyword in word.lower() for keyword in non_clickbait_keywords))
+
+           # Mengubah jumlah kemunculan semua kata clickbait sesuai dengan angka pengali
+            non_clickbait_words_freq = {word: freq * non_clickbait_keywords.get(word.lower(), 1) for word, freq in non_clickbait_words_freq.items()}
+
+            # Mengubah clickbait_words_freq menjadi objek Counter
+            non_clickbait_words_freq = Counter(non_clickbait_words_freq)
+
+            # Mengambil kata-kata clickbait yang paling sering muncul (misalnya, 10 kata teratas)
+            top_non_clickbait_words = non_clickbait_words_freq.most_common(10)
+            
+           # Tampilkan kata-kata non-clickbait yang sesuai
+            st.write("Kata-kata non-clickbait yang Paling Sering Muncul:")
+            words = [word for word, freq in top_non_clickbait_words]
+            freqs = [freq for word, freq in top_non_clickbait_words]
+    
+            # Visualisasi sebagai grafik batang
+            fig, ax = plt.subplots()
+            ax.bar(words, freqs)
+            ax.set_xlabel('Kata-kata')
+            ax.set_ylabel('Frekuensi')
+            ax.set_title('Kata-kata non-clickbait yang Paling Sering Muncul')
+            plt.xticks(rotation=45)
+
+            # Menambahkan angka pada batang chart
+            for i, freq in enumerate(freqs):
+                ax.text(i, freq, str(freq), ha='center', va='bottom')
+                
+            st.pyplot(fig)
+        
+        buffer, col2, col3 = st.columns([1,10,10])
+       
+        with col2:
+            # Calculate the number of clickbait and non-clickbait
+            clickbait_count = len(data[data['label'] == 'clickbait'])
+            non_clickbait_count = len(data[data['label'] == 'non-clickbait'])
+
+            # Create the bar chart
+            labels = ['Clickbait', 'Non-Clickbait']
+            counts = [clickbait_count, non_clickbait_count]
+
+            fig, ax = plt.subplots()
+            ax.bar(labels, counts)
+
+            # Add labels and title
+            ax.set_xlabel('Label')
+            ax.set_ylabel('Jumlah')
+            ax.set_title('Jumlah Data clickbait dan non-clickbait')
+            
+            # Add text labels to the bars
+            for i, count in enumerate(counts):
+                ax.text(i, count, str(count), ha='center', va='bottom')
+
+            # Display the chart in Streamlit
+            st.pyplot(fig)
                   
 # Run the Streamlit app
 if __name__ == '__main__':
